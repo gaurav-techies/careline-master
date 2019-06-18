@@ -1,0 +1,17 @@
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "LocalBusiness",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{ settings.carelineapp.CompanyAddressSettings.building_name|safe }}, {{ settings.carelineapp.CompanyAddressSettings.street_number|safe }}, {{ settings.carelineapp.CompanyAddressSettings.street_name|safe }}",
+    "addressLocality": "{{ settings.carelineapp.CompanyAddressSettings.town|safe }}",
+    "addressRegion": "{{ settings.carelineapp.CompanyAddressSettings.county|safe }}",
+       "postalCode": "{{ settings.carelineapp.CompanyAddressSettings.postcode|safe }}"
+  },
+  "name": "{{ settings.carelineapp.CompanyAddressSettings.company_website_name|safe }}",
+  "description": "{{ settings.carelineapp.CompanyAddressSettings.company_website_description|safe }}",
+   "telephone": "{{ settings.carelineapp.CompanyAddressSettings.phone|safe }}",
+  "url": "{{ settings.carelineapp.CompanyAddressSettings.company_url|safe }}"
+}
+</script>

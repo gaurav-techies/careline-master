@@ -1,0 +1,120 @@
+# Wheel 0.25+ needed to install certain packages on CPython 3.5+
+# like Pillow and psycopg2
+# See http://bitly.com/wheel-building-fails-CPython-35
+# Verified bug on Python 3.5.1
+#wheel==0.29.0
+#wheel
+
+# Configuration
+django-environ==0.4.5
+
+certifi==2018.8.24
+
+# Forms
+django-braces==1.11.0
+django-crispy-forms==1.7.2
+
+# Models
+django-model-utils==3.1.2
+
+# Images
+Pillow==5.2.0
+
+# Password storage
+argon2-cffi==18.3.0
+
+# Python-PostgreSQL Database Adapter
+#psycopg2==2.7.5
+psycopg2-binary==2.7.5
+
+# Unicode slugification
+awesome-slugify==1.6.5
+
+# Time zones support
+pytz==2017.2
+
+# Redis support
+django-redis==4.10.0
+redis==3.2.0
+
+celery==4.1.1
+amqp==2.1.4
+django-celery-beat==1.0.1
+
+rcssmin==1.0.6
+django-compressor==2.2
+
+# Your custom requirements go here
+
+# Email backends for Mailgun, Postmark, SendGrid and more
+# -------------------------------------------------------
+django-anymail==5.0
+django-templated-email==2.2
+requests==2.21.0
+
+credstash==1.15.0
+
+geoip2==2.9.0
+
+django-robots==3.1.0
+django-meta==1.4.1
+
+#Forms
+django-widget-tweaks==1.4.3
+
+#Login
+django-axes==4.4.0
+
+xmljson==0.1.9
+boto==2.49.0
+#boto3==1.9.4
+boto3==1.9.47
+
+wagtail-blog==2.0.2
+
+django-endless-pagination==2.0
+wagtail-metadata==2.0.0
+wagtailmenus==2.11.1
+wagtail-condensedinlinepanel==0.5
+wagtailfontawesome==1.1.3
+
+uuid==1.30
+
+django-admin-env-notice==0.1.5
+aiohttp==2.3.10
+elasticsearch>=5.0.0,<6.0.0
+django-cachalot==2.1.0
+
+# Twilio
+PyJWT==1.6.4
+django-phonenumber-field==2.0.1
+#django-twilio==0.9.3
+phonenumbers==8.9.14
+pysocks==1.6.8
+twilio==6.18.0
+
+#Wagtail
+Django==2.0.8
+wagtail==2.3
+
+# DJANGO User agents
+PyYAML==3.13
+ua-parser==0.8.0
+user-agents==1.1.0
+django-user-agents==0.3.2
+
+django-wagtail-feeds==0.1.0
+
+wagtail-2fa==1.0.0
+
+django-rest-auth==0.9.3
+
+
+django-bitly==1.2.0
+
+django-cors-headers==2.4.0
+
+rest-framework-auth0==0.4.6
+
+#django-scarface==3.2.1
+git+https://github.com/tekkypartners/django-scarface-tekky.git

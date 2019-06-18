@@ -1,0 +1,5448 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.6.10
+-- Dumped by pg_dump version 9.6.10
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(80) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: authtoken_token; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.authtoken_token (
+    key character varying(40) NOT NULL,
+    created timestamp with time zone NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+ALTER TABLE public.authtoken_token OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_basicpage; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_basicpage (
+    page_ptr_id integer NOT NULL,
+    author character varying(255) NOT NULL,
+    date date NOT NULL,
+    body text NOT NULL
+);
+
+
+ALTER TABLE public.carelineapp_basicpage OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_basicpagetag; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_basicpagetag (
+    id integer NOT NULL,
+    content_object_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
+
+
+ALTER TABLE public.carelineapp_basicpagetag OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_basicpagetag_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.carelineapp_basicpagetag_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.carelineapp_basicpagetag_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_basicpagetag_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.carelineapp_basicpagetag_id_seq OWNED BY public.carelineapp_basicpagetag.id;
+
+
+--
+-- Name: carelineapp_companyaddresssettings; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_companyaddresssettings (
+    id integer NOT NULL,
+    company_name character varying(255) NOT NULL,
+    building_name character varying(255) NOT NULL,
+    street_number character varying(255) NOT NULL,
+    street_name character varying(255) NOT NULL,
+    town character varying(255) NOT NULL,
+    county character varying(255) NOT NULL,
+    postcode character varying(255) NOT NULL,
+    pobox character varying(255) NOT NULL,
+    phone character varying(255) NOT NULL,
+    email character varying(255) NOT NULL,
+    copyright character varying(1000) NOT NULL,
+    company_number character varying(1000) NOT NULL,
+    openingtimes character varying(1000) NOT NULL,
+    description_header character varying(200) NOT NULL,
+    description_one character varying(1000) NOT NULL,
+    description_two character varying(1000) NOT NULL,
+    description_three character varying(1000) NOT NULL,
+    company_footnote character varying(1000) NOT NULL,
+    company_url character varying(100) NOT NULL,
+    company_website_name character varying(100) NOT NULL,
+    company_website_description character varying(100) NOT NULL,
+    site_id integer NOT NULL
+);
+
+
+ALTER TABLE public.carelineapp_companyaddresssettings OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_companyaddresssettings_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.carelineapp_companyaddresssettings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.carelineapp_companyaddresssettings_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_companyaddresssettings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.carelineapp_companyaddresssettings_id_seq OWNED BY public.carelineapp_companyaddresssettings.id;
+
+
+--
+-- Name: carelineapp_contactuspage; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_contactuspage (
+    page_ptr_id integer NOT NULL,
+    author character varying(255) NOT NULL,
+    date date NOT NULL,
+    phone_number integer,
+    email character varying(254)
+);
+
+
+ALTER TABLE public.carelineapp_contactuspage OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_contactuspagetag; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_contactuspagetag (
+    id integer NOT NULL,
+    content_object_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
+
+
+ALTER TABLE public.carelineapp_contactuspagetag OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_contactuspagetag_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.carelineapp_contactuspagetag_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.carelineapp_contactuspagetag_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_contactuspagetag_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.carelineapp_contactuspagetag_id_seq OWNED BY public.carelineapp_contactuspagetag.id;
+
+
+--
+-- Name: carelineapp_googlesettings; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_googlesettings (
+    id integer NOT NULL,
+    tagmanager character varying(255) NOT NULL,
+    analytics character varying(255) NOT NULL,
+    site_id integer NOT NULL
+);
+
+
+ALTER TABLE public.carelineapp_googlesettings OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_googlesettings_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.carelineapp_googlesettings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.carelineapp_googlesettings_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_googlesettings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.carelineapp_googlesettings_id_seq OWNED BY public.carelineapp_googlesettings.id;
+
+
+--
+-- Name: carelineapp_loginpage; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_loginpage (
+    page_ptr_id integer NOT NULL,
+    author character varying(255) NOT NULL,
+    date date NOT NULL,
+    email_helper_text text,
+    password_helper_text text,
+    keep_me_logged_helper_text text
+);
+
+
+ALTER TABLE public.carelineapp_loginpage OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_loginpagetag; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_loginpagetag (
+    id integer NOT NULL,
+    content_object_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
+
+
+ALTER TABLE public.carelineapp_loginpagetag OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_loginpagetag_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.carelineapp_loginpagetag_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.carelineapp_loginpagetag_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_loginpagetag_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.carelineapp_loginpagetag_id_seq OWNED BY public.carelineapp_loginpagetag.id;
+
+
+--
+-- Name: carelineapp_referfriendpage; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_referfriendpage (
+    page_ptr_id integer NOT NULL,
+    author character varying(255) NOT NULL,
+    date date NOT NULL,
+    action_title character varying(255),
+    section_name character varying(255),
+    sub_title character varying(255),
+    helper_text_one text,
+    helper_text_two text
+);
+
+
+ALTER TABLE public.carelineapp_referfriendpage OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_referfriendpagetag; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_referfriendpagetag (
+    id integer NOT NULL,
+    content_object_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
+
+
+ALTER TABLE public.carelineapp_referfriendpagetag OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_referfriendpagetag_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.carelineapp_referfriendpagetag_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.carelineapp_referfriendpagetag_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_referfriendpagetag_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.carelineapp_referfriendpagetag_id_seq OWNED BY public.carelineapp_referfriendpagetag.id;
+
+
+--
+-- Name: carelineapp_sendsmslink; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_sendsmslink (
+    page_ptr_id integer NOT NULL,
+    author character varying(255) NOT NULL,
+    date date NOT NULL,
+    name_helper_text text,
+    friends_mobile_number_helper_text text
+);
+
+
+ALTER TABLE public.carelineapp_sendsmslink OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_sendsmslinkpagetag; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_sendsmslinkpagetag (
+    id integer NOT NULL,
+    content_object_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
+
+
+ALTER TABLE public.carelineapp_sendsmslinkpagetag OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_sendsmslinkpagetag_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.carelineapp_sendsmslinkpagetag_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.carelineapp_sendsmslinkpagetag_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_sendsmslinkpagetag_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.carelineapp_sendsmslinkpagetag_id_seq OWNED BY public.carelineapp_sendsmslinkpagetag.id;
+
+
+--
+-- Name: carelineapp_signuppage; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_signuppage (
+    page_ptr_id integer NOT NULL,
+    author character varying(255) NOT NULL,
+    date date NOT NULL,
+    first_name_helper_text text,
+    last_name_helper_text text,
+    email_helper_text text,
+    mobile_helper_text text,
+    password_helper_text text,
+    agree_terms_helper_text text
+);
+
+
+ALTER TABLE public.carelineapp_signuppage OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_signuppagetag; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_signuppagetag (
+    id integer NOT NULL,
+    content_object_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
+
+
+ALTER TABLE public.carelineapp_signuppagetag OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_signuppagetag_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.carelineapp_signuppagetag_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.carelineapp_signuppagetag_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_signuppagetag_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.carelineapp_signuppagetag_id_seq OWNED BY public.carelineapp_signuppagetag.id;
+
+
+--
+-- Name: carelineapp_smstemplate; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_smstemplate (
+    id integer NOT NULL,
+    text character varying(160) NOT NULL,
+    from_sms character varying(10) NOT NULL
+);
+
+
+ALTER TABLE public.carelineapp_smstemplate OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_smstemplate_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.carelineapp_smstemplate_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.carelineapp_smstemplate_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_smstemplate_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.carelineapp_smstemplate_id_seq OWNED BY public.carelineapp_smstemplate.id;
+
+
+--
+-- Name: carelineapp_supportuspage; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_supportuspage (
+    page_ptr_id integer NOT NULL,
+    author character varying(255) NOT NULL,
+    date date NOT NULL,
+    action_title character varying(255) NOT NULL,
+    section_name character varying(255) NOT NULL,
+    sub_title character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.carelineapp_supportuspage OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_supportuspagetag; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_supportuspagetag (
+    id integer NOT NULL,
+    content_object_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
+
+
+ALTER TABLE public.carelineapp_supportuspagetag OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_supportuspagetag_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.carelineapp_supportuspagetag_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.carelineapp_supportuspagetag_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_supportuspagetag_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.carelineapp_supportuspagetag_id_seq OWNED BY public.carelineapp_supportuspagetag.id;
+
+
+--
+-- Name: carelineapp_topic; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.carelineapp_topic (
+    id integer NOT NULL,
+    custom_url character varying(200),
+    introduction character varying(300) NOT NULL,
+    title character varying(50) NOT NULL,
+    counselling_topic_id integer
+);
+
+
+ALTER TABLE public.carelineapp_topic OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_topics_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.carelineapp_topics_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.carelineapp_topics_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: carelineapp_topics_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.carelineapp_topics_id_seq OWNED BY public.carelineapp_topic.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_bitly_bittle; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.django_bitly_bittle (
+    id integer NOT NULL,
+    object_id integer NOT NULL,
+    absolute_url character varying(1024) NOT NULL,
+    hash character varying(10) NOT NULL,
+    "shortKeywordUrl" character varying(200) NOT NULL,
+    "shortUrl" character varying(200) NOT NULL,
+    "userHash" character varying(10) NOT NULL,
+    statstring text NOT NULL,
+    statstamp timestamp with time zone,
+    date_created timestamp with time zone NOT NULL,
+    date_modified timestamp with time zone NOT NULL,
+    content_type_id integer NOT NULL,
+    CONSTRAINT django_bitly_bittle_object_id_check CHECK ((object_id >= 0))
+);
+
+
+ALTER TABLE public.django_bitly_bittle OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: django_bitly_bittle_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.django_bitly_bittle_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_bitly_bittle_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: django_bitly_bittle_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.django_bitly_bittle_id_seq OWNED BY public.django_bitly_bittle.id;
+
+
+--
+-- Name: django_bitly_stringholder; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.django_bitly_stringholder (
+    id integer NOT NULL,
+    absolute_url character varying(1024) NOT NULL
+);
+
+
+ALTER TABLE public.django_bitly_stringholder OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: django_bitly_stringholder_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.django_bitly_stringholder_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_bitly_stringholder_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: django_bitly_stringholder_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.django_bitly_stringholder_id_seq OWNED BY public.django_bitly_stringholder.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: django_site; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.django_site (
+    id integer NOT NULL,
+    domain character varying(100) NOT NULL,
+    name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.django_site OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.django_site_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_site_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.django_site_id_seq OWNED BY public.django_site.id;
+
+
+--
+-- Name: leads_leaddb; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.leads_leaddb (
+    leadid uuid NOT NULL,
+    recipient_contact_name character varying(250),
+    recipient_contact_number character varying(20) NOT NULL,
+    referral_text_message_reason character varying(255),
+    date_time_referral timestamp with time zone,
+    text_message_body character varying(1000),
+    callback_permission boolean NOT NULL,
+    recipient_permission boolean NOT NULL,
+    bitly_link character varying(100),
+    bitly_link_clicked boolean NOT NULL,
+    twilio_sms_sid character varying(100),
+    careline_topic_id integer NOT NULL,
+    user_id integer
+);
+
+
+ALTER TABLE public.leads_leaddb OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: leads_tracking; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.leads_tracking (
+    id integer NOT NULL,
+    created_time timestamp with time zone NOT NULL,
+    updated_time timestamp with time zone NOT NULL,
+    landed_time timestamp with time zone NOT NULL,
+    apilevel integer,
+    application_name character varying(255),
+    brand character varying(255),
+    build_number integer,
+    bundle_id character varying(255),
+    carrier character varying(255),
+    device_country character varying(10),
+    device_id character varying(255),
+    device_locale character varying(20),
+    device_name character varying(255),
+    first_install_time bigint,
+    font_scale numeric(5,2),
+    free_disk_storage bigint,
+    ip_address character varying(20),
+    install_referrer character varying(255),
+    instance_id character varying(255),
+    last_update_time character varying(255),
+    mac_address character varying(255),
+    manufacturer character varying(255),
+    max_memory integer,
+    model character varying(255),
+    phone_number character varying(20),
+    readable_version character varying(20),
+    serial_number character varying(255),
+    system_name character varying(255),
+    system_version character varying(255),
+    timezone character varying(100),
+    total_disk_capacity bigint,
+    total_memory bigint,
+    unique_id character varying(100),
+    useragent character varying(1000),
+    version character varying(100),
+    twenty_four_hour boolean NOT NULL,
+    emulator boolean NOT NULL,
+    pin_or_fingerprint_set boolean NOT NULL,
+    tablet boolean NOT NULL,
+    latitude character varying(20),
+    longitude character varying(20),
+    ticket_ref character varying(30)
+);
+
+
+ALTER TABLE public.leads_tracking OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: leads_tracking_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.leads_tracking_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.leads_tracking_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: leads_tracking_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.leads_tracking_id_seq OWNED BY public.leads_tracking.id;
+
+
+--
+-- Name: otp_totp_totpdevice; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.otp_totp_totpdevice (
+    id integer NOT NULL,
+    name character varying(64) NOT NULL,
+    confirmed boolean NOT NULL,
+    key character varying(80) NOT NULL,
+    step smallint NOT NULL,
+    t0 bigint NOT NULL,
+    digits smallint NOT NULL,
+    tolerance smallint NOT NULL,
+    drift smallint NOT NULL,
+    last_t bigint NOT NULL,
+    user_id integer NOT NULL,
+    CONSTRAINT otp_totp_totpdevice_digits_check CHECK ((digits >= 0)),
+    CONSTRAINT otp_totp_totpdevice_step_check CHECK ((step >= 0)),
+    CONSTRAINT otp_totp_totpdevice_tolerance_check CHECK ((tolerance >= 0))
+);
+
+
+ALTER TABLE public.otp_totp_totpdevice OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: otp_totp_totpdevice_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.otp_totp_totpdevice_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.otp_totp_totpdevice_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: otp_totp_totpdevice_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.otp_totp_totpdevice_id_seq OWNED BY public.otp_totp_totpdevice.id;
+
+
+--
+-- Name: taggit_tag; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.taggit_tag (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL,
+    slug character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.taggit_tag OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: taggit_tag_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.taggit_tag_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.taggit_tag_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: taggit_tag_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.taggit_tag_id_seq OWNED BY public.taggit_tag.id;
+
+
+--
+-- Name: taggit_taggeditem; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.taggit_taggeditem (
+    id integer NOT NULL,
+    object_id integer NOT NULL,
+    content_type_id integer NOT NULL,
+    tag_id integer NOT NULL
+);
+
+
+ALTER TABLE public.taggit_taggeditem OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: taggit_taggeditem_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.taggit_taggeditem_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.taggit_taggeditem_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: taggit_taggeditem_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.taggit_taggeditem_id_seq OWNED BY public.taggit_taggeditem.id;
+
+
+--
+-- Name: users_tracking; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.users_tracking (
+    id integer NOT NULL,
+    created_time timestamp with time zone NOT NULL,
+    updated_time timestamp with time zone NOT NULL,
+    landed_time timestamp with time zone,
+    apilevel integer,
+    application_name character varying(255),
+    brand character varying(255),
+    build_number integer,
+    bundle_id character varying(255),
+    carrier character varying(255),
+    device_country character varying(10),
+    device_id character varying(255),
+    device_locale character varying(20),
+    device_name character varying(255),
+    first_install_time bigint,
+    font_scale numeric(5,2),
+    free_disk_storage bigint,
+    ip_address character varying(20),
+    install_referrer character varying(255),
+    instance_id character varying(255),
+    last_update_time character varying(255),
+    mac_address character varying(255),
+    manufacturer character varying(255),
+    max_memory integer,
+    model character varying(255),
+    phone_number character varying(20),
+    readable_version character varying(20),
+    serial_number character varying(255),
+    system_name character varying(255),
+    system_version character varying(255),
+    timezone character varying(100),
+    total_disk_capacity bigint,
+    total_memory bigint,
+    unique_id character varying(100),
+    useragent character varying(1000),
+    version character varying(100),
+    twenty_four_hour boolean NOT NULL,
+    emulator boolean NOT NULL,
+    pin_or_fingerprint_set boolean NOT NULL,
+    tablet boolean NOT NULL,
+    latitude character varying(20),
+    longitude character varying(20),
+    ticket_ref character varying(30)
+);
+
+
+ALTER TABLE public.users_tracking OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: users_tracking_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.users_tracking_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_tracking_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: users_tracking_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.users_tracking_id_seq OWNED BY public.users_tracking.id;
+
+
+--
+-- Name: users_user; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.users_user (
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL,
+    first_name character varying(255) NOT NULL,
+    last_name character varying(255) NOT NULL,
+    mobile integer,
+    tracking_ptr_id integer NOT NULL
+);
+
+
+ALTER TABLE public.users_user OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: users_user_groups; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.users_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.users_user_groups OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: users_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.users_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_user_groups_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: users_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.users_user_groups_id_seq OWNED BY public.users_user_groups.id;
+
+
+--
+-- Name: users_user_user_permissions; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.users_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.users_user_user_permissions OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: users_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.users_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_user_user_permissions_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: users_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.users_user_user_permissions_id_seq OWNED BY public.users_user_user_permissions.id;
+
+
+--
+-- Name: wagtail_feeds_rssfeedssettings; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtail_feeds_rssfeedssettings (
+    id integer NOT NULL,
+    feed_app_label character varying(255),
+    feed_model_name character varying(255),
+    feed_title character varying(255),
+    feed_link character varying(255),
+    feed_description character varying(255),
+    feed_author_email character varying(255),
+    feed_author_link character varying(255),
+    feed_item_description_field character varying(255),
+    feed_item_content_field character varying(255),
+    site_id integer NOT NULL,
+    feed_image_in_content boolean NOT NULL,
+    feed_item_date_field character varying(255) NOT NULL,
+    is_feed_item_date_field_datetime boolean NOT NULL
+);
+
+
+ALTER TABLE public.wagtail_feeds_rssfeedssettings OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtail_feeds_rssfeedssettings_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtail_feeds_rssfeedssettings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtail_feeds_rssfeedssettings_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtail_feeds_rssfeedssettings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtail_feeds_rssfeedssettings_id_seq OWNED BY public.wagtail_feeds_rssfeedssettings.id;
+
+
+--
+-- Name: wagtailcore_collection; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailcore_collection (
+    id integer NOT NULL,
+    path character varying(255) COLLATE pg_catalog."C" NOT NULL,
+    depth integer NOT NULL,
+    numchild integer NOT NULL,
+    name character varying(255) NOT NULL,
+    CONSTRAINT wagtailcore_collection_depth_check CHECK ((depth >= 0)),
+    CONSTRAINT wagtailcore_collection_numchild_check CHECK ((numchild >= 0))
+);
+
+
+ALTER TABLE public.wagtailcore_collection OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_collection_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailcore_collection_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailcore_collection_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_collection_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailcore_collection_id_seq OWNED BY public.wagtailcore_collection.id;
+
+
+--
+-- Name: wagtailcore_collectionviewrestriction; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailcore_collectionviewrestriction (
+    id integer NOT NULL,
+    restriction_type character varying(20) NOT NULL,
+    password character varying(255) NOT NULL,
+    collection_id integer NOT NULL
+);
+
+
+ALTER TABLE public.wagtailcore_collectionviewrestriction OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_collectionviewrestriction_groups; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailcore_collectionviewrestriction_groups (
+    id integer NOT NULL,
+    collectionviewrestriction_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.wagtailcore_collectionviewrestriction_groups OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_collectionviewrestriction_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailcore_collectionviewrestriction_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailcore_collectionviewrestriction_groups_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_collectionviewrestriction_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailcore_collectionviewrestriction_groups_id_seq OWNED BY public.wagtailcore_collectionviewrestriction_groups.id;
+
+
+--
+-- Name: wagtailcore_collectionviewrestriction_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailcore_collectionviewrestriction_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailcore_collectionviewrestriction_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_collectionviewrestriction_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailcore_collectionviewrestriction_id_seq OWNED BY public.wagtailcore_collectionviewrestriction.id;
+
+
+--
+-- Name: wagtailcore_groupcollectionpermission; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailcore_groupcollectionpermission (
+    id integer NOT NULL,
+    collection_id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.wagtailcore_groupcollectionpermission OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_groupcollectionpermission_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailcore_groupcollectionpermission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailcore_groupcollectionpermission_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_groupcollectionpermission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailcore_groupcollectionpermission_id_seq OWNED BY public.wagtailcore_groupcollectionpermission.id;
+
+
+--
+-- Name: wagtailcore_grouppagepermission; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailcore_grouppagepermission (
+    id integer NOT NULL,
+    permission_type character varying(20) NOT NULL,
+    group_id integer NOT NULL,
+    page_id integer NOT NULL
+);
+
+
+ALTER TABLE public.wagtailcore_grouppagepermission OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_grouppagepermission_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailcore_grouppagepermission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailcore_grouppagepermission_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_grouppagepermission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailcore_grouppagepermission_id_seq OWNED BY public.wagtailcore_grouppagepermission.id;
+
+
+--
+-- Name: wagtailcore_page; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailcore_page (
+    id integer NOT NULL,
+    path character varying(255) COLLATE pg_catalog."C" NOT NULL,
+    depth integer NOT NULL,
+    numchild integer NOT NULL,
+    title character varying(255) NOT NULL,
+    slug character varying(255) NOT NULL,
+    live boolean NOT NULL,
+    has_unpublished_changes boolean NOT NULL,
+    url_path text NOT NULL,
+    seo_title character varying(255) NOT NULL,
+    show_in_menus boolean NOT NULL,
+    search_description text NOT NULL,
+    go_live_at timestamp with time zone,
+    expire_at timestamp with time zone,
+    expired boolean NOT NULL,
+    content_type_id integer NOT NULL,
+    owner_id integer,
+    locked boolean NOT NULL,
+    latest_revision_created_at timestamp with time zone,
+    first_published_at timestamp with time zone,
+    live_revision_id integer,
+    last_published_at timestamp with time zone,
+    draft_title character varying(255) NOT NULL,
+    CONSTRAINT wagtailcore_page_depth_check CHECK ((depth >= 0)),
+    CONSTRAINT wagtailcore_page_numchild_check CHECK ((numchild >= 0))
+);
+
+
+ALTER TABLE public.wagtailcore_page OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_page_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailcore_page_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailcore_page_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_page_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailcore_page_id_seq OWNED BY public.wagtailcore_page.id;
+
+
+--
+-- Name: wagtailcore_pagerevision; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailcore_pagerevision (
+    id integer NOT NULL,
+    submitted_for_moderation boolean NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    content_json text NOT NULL,
+    approved_go_live_at timestamp with time zone,
+    page_id integer NOT NULL,
+    user_id integer
+);
+
+
+ALTER TABLE public.wagtailcore_pagerevision OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_pagerevision_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailcore_pagerevision_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailcore_pagerevision_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_pagerevision_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailcore_pagerevision_id_seq OWNED BY public.wagtailcore_pagerevision.id;
+
+
+--
+-- Name: wagtailcore_pageviewrestriction; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailcore_pageviewrestriction (
+    id integer NOT NULL,
+    password character varying(255) NOT NULL,
+    page_id integer NOT NULL,
+    restriction_type character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public.wagtailcore_pageviewrestriction OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_pageviewrestriction_groups; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailcore_pageviewrestriction_groups (
+    id integer NOT NULL,
+    pageviewrestriction_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.wagtailcore_pageviewrestriction_groups OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_pageviewrestriction_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailcore_pageviewrestriction_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailcore_pageviewrestriction_groups_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_pageviewrestriction_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailcore_pageviewrestriction_groups_id_seq OWNED BY public.wagtailcore_pageviewrestriction_groups.id;
+
+
+--
+-- Name: wagtailcore_pageviewrestriction_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailcore_pageviewrestriction_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailcore_pageviewrestriction_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_pageviewrestriction_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailcore_pageviewrestriction_id_seq OWNED BY public.wagtailcore_pageviewrestriction.id;
+
+
+--
+-- Name: wagtailcore_site; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailcore_site (
+    id integer NOT NULL,
+    hostname character varying(255) NOT NULL,
+    port integer NOT NULL,
+    is_default_site boolean NOT NULL,
+    root_page_id integer NOT NULL,
+    site_name character varying(255)
+);
+
+
+ALTER TABLE public.wagtailcore_site OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_site_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailcore_site_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailcore_site_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailcore_site_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailcore_site_id_seq OWNED BY public.wagtailcore_site.id;
+
+
+--
+-- Name: wagtaildocs_document; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtaildocs_document (
+    id integer NOT NULL,
+    title character varying(255) NOT NULL,
+    file character varying(100) NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    uploaded_by_user_id integer,
+    collection_id integer NOT NULL,
+    file_size integer,
+    CONSTRAINT wagtaildocs_document_file_size_check CHECK ((file_size >= 0))
+);
+
+
+ALTER TABLE public.wagtaildocs_document OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtaildocs_document_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtaildocs_document_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtaildocs_document_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtaildocs_document_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtaildocs_document_id_seq OWNED BY public.wagtaildocs_document.id;
+
+
+--
+-- Name: wagtailembeds_embed; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailembeds_embed (
+    id integer NOT NULL,
+    url character varying(200) NOT NULL,
+    max_width smallint,
+    type character varying(10) NOT NULL,
+    html text NOT NULL,
+    title text NOT NULL,
+    author_name text NOT NULL,
+    provider_name text NOT NULL,
+    thumbnail_url character varying(200),
+    width integer,
+    height integer,
+    last_updated timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.wagtailembeds_embed OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailembeds_embed_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailembeds_embed_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailembeds_embed_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailembeds_embed_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailembeds_embed_id_seq OWNED BY public.wagtailembeds_embed.id;
+
+
+--
+-- Name: wagtailforms_formsubmission; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailforms_formsubmission (
+    id integer NOT NULL,
+    form_data text NOT NULL,
+    submit_time timestamp with time zone NOT NULL,
+    page_id integer NOT NULL
+);
+
+
+ALTER TABLE public.wagtailforms_formsubmission OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailforms_formsubmission_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailforms_formsubmission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailforms_formsubmission_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailforms_formsubmission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailforms_formsubmission_id_seq OWNED BY public.wagtailforms_formsubmission.id;
+
+
+--
+-- Name: wagtailimages_image; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailimages_image (
+    id integer NOT NULL,
+    title character varying(255) NOT NULL,
+    file character varying(100) NOT NULL,
+    width integer NOT NULL,
+    height integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    focal_point_x integer,
+    focal_point_y integer,
+    focal_point_width integer,
+    focal_point_height integer,
+    uploaded_by_user_id integer,
+    file_size integer,
+    collection_id integer NOT NULL,
+    file_hash character varying(40) NOT NULL,
+    CONSTRAINT wagtailimages_image_file_size_check CHECK ((file_size >= 0)),
+    CONSTRAINT wagtailimages_image_focal_point_height_check CHECK ((focal_point_height >= 0)),
+    CONSTRAINT wagtailimages_image_focal_point_width_check CHECK ((focal_point_width >= 0)),
+    CONSTRAINT wagtailimages_image_focal_point_x_check CHECK ((focal_point_x >= 0)),
+    CONSTRAINT wagtailimages_image_focal_point_y_check CHECK ((focal_point_y >= 0))
+);
+
+
+ALTER TABLE public.wagtailimages_image OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailimages_image_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailimages_image_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailimages_image_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailimages_image_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailimages_image_id_seq OWNED BY public.wagtailimages_image.id;
+
+
+--
+-- Name: wagtailimages_rendition; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailimages_rendition (
+    id integer NOT NULL,
+    file character varying(100) NOT NULL,
+    width integer NOT NULL,
+    height integer NOT NULL,
+    focal_point_key character varying(16) NOT NULL,
+    image_id integer NOT NULL,
+    filter_spec character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.wagtailimages_rendition OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailimages_rendition_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailimages_rendition_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailimages_rendition_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailimages_rendition_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailimages_rendition_id_seq OWNED BY public.wagtailimages_rendition.id;
+
+
+--
+-- Name: wagtailredirects_redirect; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailredirects_redirect (
+    id integer NOT NULL,
+    old_path character varying(255) NOT NULL,
+    is_permanent boolean NOT NULL,
+    redirect_link character varying(255) NOT NULL,
+    redirect_page_id integer,
+    site_id integer
+);
+
+
+ALTER TABLE public.wagtailredirects_redirect OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailredirects_redirect_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailredirects_redirect_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailredirects_redirect_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailredirects_redirect_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailredirects_redirect_id_seq OWNED BY public.wagtailredirects_redirect.id;
+
+
+--
+-- Name: wagtailsearch_editorspick; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailsearch_editorspick (
+    id integer NOT NULL,
+    sort_order integer,
+    description text NOT NULL,
+    page_id integer NOT NULL,
+    query_id integer NOT NULL
+);
+
+
+ALTER TABLE public.wagtailsearch_editorspick OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailsearch_editorspick_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailsearch_editorspick_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailsearch_editorspick_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailsearch_editorspick_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailsearch_editorspick_id_seq OWNED BY public.wagtailsearch_editorspick.id;
+
+
+--
+-- Name: wagtailsearch_query; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailsearch_query (
+    id integer NOT NULL,
+    query_string character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.wagtailsearch_query OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailsearch_query_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailsearch_query_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailsearch_query_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailsearch_query_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailsearch_query_id_seq OWNED BY public.wagtailsearch_query.id;
+
+
+--
+-- Name: wagtailsearch_querydailyhits; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailsearch_querydailyhits (
+    id integer NOT NULL,
+    date date NOT NULL,
+    hits integer NOT NULL,
+    query_id integer NOT NULL
+);
+
+
+ALTER TABLE public.wagtailsearch_querydailyhits OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailsearch_querydailyhits_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailsearch_querydailyhits_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailsearch_querydailyhits_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailsearch_querydailyhits_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailsearch_querydailyhits_id_seq OWNED BY public.wagtailsearch_querydailyhits.id;
+
+
+--
+-- Name: wagtailusers_userprofile; Type: TABLE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE TABLE public.wagtailusers_userprofile (
+    id integer NOT NULL,
+    submitted_notifications boolean NOT NULL,
+    approved_notifications boolean NOT NULL,
+    rejected_notifications boolean NOT NULL,
+    user_id integer NOT NULL,
+    preferred_language character varying(10) NOT NULL,
+    current_time_zone character varying(40) NOT NULL,
+    avatar character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.wagtailusers_userprofile OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailusers_userprofile_id_seq; Type: SEQUENCE; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE SEQUENCE public.wagtailusers_userprofile_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wagtailusers_userprofile_id_seq OWNER TO carelineapp_dev8ll88822;
+
+--
+-- Name: wagtailusers_userprofile_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER SEQUENCE public.wagtailusers_userprofile_id_seq OWNED BY public.wagtailusers_userprofile.id;
+
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: carelineapp_basicpagetag id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_basicpagetag ALTER COLUMN id SET DEFAULT nextval('public.carelineapp_basicpagetag_id_seq'::regclass);
+
+
+--
+-- Name: carelineapp_companyaddresssettings id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_companyaddresssettings ALTER COLUMN id SET DEFAULT nextval('public.carelineapp_companyaddresssettings_id_seq'::regclass);
+
+
+--
+-- Name: carelineapp_contactuspagetag id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_contactuspagetag ALTER COLUMN id SET DEFAULT nextval('public.carelineapp_contactuspagetag_id_seq'::regclass);
+
+
+--
+-- Name: carelineapp_googlesettings id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_googlesettings ALTER COLUMN id SET DEFAULT nextval('public.carelineapp_googlesettings_id_seq'::regclass);
+
+
+--
+-- Name: carelineapp_loginpagetag id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_loginpagetag ALTER COLUMN id SET DEFAULT nextval('public.carelineapp_loginpagetag_id_seq'::regclass);
+
+
+--
+-- Name: carelineapp_referfriendpagetag id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_referfriendpagetag ALTER COLUMN id SET DEFAULT nextval('public.carelineapp_referfriendpagetag_id_seq'::regclass);
+
+
+--
+-- Name: carelineapp_sendsmslinkpagetag id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_sendsmslinkpagetag ALTER COLUMN id SET DEFAULT nextval('public.carelineapp_sendsmslinkpagetag_id_seq'::regclass);
+
+
+--
+-- Name: carelineapp_signuppagetag id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_signuppagetag ALTER COLUMN id SET DEFAULT nextval('public.carelineapp_signuppagetag_id_seq'::regclass);
+
+
+--
+-- Name: carelineapp_smstemplate id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_smstemplate ALTER COLUMN id SET DEFAULT nextval('public.carelineapp_smstemplate_id_seq'::regclass);
+
+
+--
+-- Name: carelineapp_supportuspagetag id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_supportuspagetag ALTER COLUMN id SET DEFAULT nextval('public.carelineapp_supportuspagetag_id_seq'::regclass);
+
+
+--
+-- Name: carelineapp_topic id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_topic ALTER COLUMN id SET DEFAULT nextval('public.carelineapp_topics_id_seq'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_bitly_bittle id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.django_bitly_bittle ALTER COLUMN id SET DEFAULT nextval('public.django_bitly_bittle_id_seq'::regclass);
+
+
+--
+-- Name: django_bitly_stringholder id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.django_bitly_stringholder ALTER COLUMN id SET DEFAULT nextval('public.django_bitly_stringholder_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: django_site id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.django_site ALTER COLUMN id SET DEFAULT nextval('public.django_site_id_seq'::regclass);
+
+
+--
+-- Name: leads_tracking id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.leads_tracking ALTER COLUMN id SET DEFAULT nextval('public.leads_tracking_id_seq'::regclass);
+
+
+--
+-- Name: otp_totp_totpdevice id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.otp_totp_totpdevice ALTER COLUMN id SET DEFAULT nextval('public.otp_totp_totpdevice_id_seq'::regclass);
+
+
+--
+-- Name: taggit_tag id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.taggit_tag ALTER COLUMN id SET DEFAULT nextval('public.taggit_tag_id_seq'::regclass);
+
+
+--
+-- Name: taggit_taggeditem id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.taggit_taggeditem ALTER COLUMN id SET DEFAULT nextval('public.taggit_taggeditem_id_seq'::regclass);
+
+
+--
+-- Name: users_tracking id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.users_tracking ALTER COLUMN id SET DEFAULT nextval('public.users_tracking_id_seq'::regclass);
+
+
+--
+-- Name: users_user_groups id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.users_user_groups ALTER COLUMN id SET DEFAULT nextval('public.users_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: users_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.users_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.users_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: wagtail_feeds_rssfeedssettings id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtail_feeds_rssfeedssettings ALTER COLUMN id SET DEFAULT nextval('public.wagtail_feeds_rssfeedssettings_id_seq'::regclass);
+
+
+--
+-- Name: wagtailcore_collection id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_collection ALTER COLUMN id SET DEFAULT nextval('public.wagtailcore_collection_id_seq'::regclass);
+
+
+--
+-- Name: wagtailcore_collectionviewrestriction id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_collectionviewrestriction ALTER COLUMN id SET DEFAULT nextval('public.wagtailcore_collectionviewrestriction_id_seq'::regclass);
+
+
+--
+-- Name: wagtailcore_collectionviewrestriction_groups id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_collectionviewrestriction_groups ALTER COLUMN id SET DEFAULT nextval('public.wagtailcore_collectionviewrestriction_groups_id_seq'::regclass);
+
+
+--
+-- Name: wagtailcore_groupcollectionpermission id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_groupcollectionpermission ALTER COLUMN id SET DEFAULT nextval('public.wagtailcore_groupcollectionpermission_id_seq'::regclass);
+
+
+--
+-- Name: wagtailcore_grouppagepermission id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_grouppagepermission ALTER COLUMN id SET DEFAULT nextval('public.wagtailcore_grouppagepermission_id_seq'::regclass);
+
+
+--
+-- Name: wagtailcore_page id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_page ALTER COLUMN id SET DEFAULT nextval('public.wagtailcore_page_id_seq'::regclass);
+
+
+--
+-- Name: wagtailcore_pagerevision id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_pagerevision ALTER COLUMN id SET DEFAULT nextval('public.wagtailcore_pagerevision_id_seq'::regclass);
+
+
+--
+-- Name: wagtailcore_pageviewrestriction id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_pageviewrestriction ALTER COLUMN id SET DEFAULT nextval('public.wagtailcore_pageviewrestriction_id_seq'::regclass);
+
+
+--
+-- Name: wagtailcore_pageviewrestriction_groups id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_pageviewrestriction_groups ALTER COLUMN id SET DEFAULT nextval('public.wagtailcore_pageviewrestriction_groups_id_seq'::regclass);
+
+
+--
+-- Name: wagtailcore_site id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_site ALTER COLUMN id SET DEFAULT nextval('public.wagtailcore_site_id_seq'::regclass);
+
+
+--
+-- Name: wagtaildocs_document id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtaildocs_document ALTER COLUMN id SET DEFAULT nextval('public.wagtaildocs_document_id_seq'::regclass);
+
+
+--
+-- Name: wagtailembeds_embed id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailembeds_embed ALTER COLUMN id SET DEFAULT nextval('public.wagtailembeds_embed_id_seq'::regclass);
+
+
+--
+-- Name: wagtailforms_formsubmission id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailforms_formsubmission ALTER COLUMN id SET DEFAULT nextval('public.wagtailforms_formsubmission_id_seq'::regclass);
+
+
+--
+-- Name: wagtailimages_image id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailimages_image ALTER COLUMN id SET DEFAULT nextval('public.wagtailimages_image_id_seq'::regclass);
+
+
+--
+-- Name: wagtailimages_rendition id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailimages_rendition ALTER COLUMN id SET DEFAULT nextval('public.wagtailimages_rendition_id_seq'::regclass);
+
+
+--
+-- Name: wagtailredirects_redirect id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailredirects_redirect ALTER COLUMN id SET DEFAULT nextval('public.wagtailredirects_redirect_id_seq'::regclass);
+
+
+--
+-- Name: wagtailsearch_editorspick id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailsearch_editorspick ALTER COLUMN id SET DEFAULT nextval('public.wagtailsearch_editorspick_id_seq'::regclass);
+
+
+--
+-- Name: wagtailsearch_query id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailsearch_query ALTER COLUMN id SET DEFAULT nextval('public.wagtailsearch_query_id_seq'::regclass);
+
+
+--
+-- Name: wagtailsearch_querydailyhits id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailsearch_querydailyhits ALTER COLUMN id SET DEFAULT nextval('public.wagtailsearch_querydailyhits_id_seq'::regclass);
+
+
+--
+-- Name: wagtailusers_userprofile id; Type: DEFAULT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailusers_userprofile ALTER COLUMN id SET DEFAULT nextval('public.wagtailusers_userprofile_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+1	Moderators
+2	Editors
+3	Users
+4	SMS Templates
+5	Topics
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 5, true);
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+1	1	1
+2	2	1
+3	1	2
+4	1	3
+5	1	4
+6	2	2
+7	2	3
+8	2	4
+9	1	5
+10	1	6
+11	1	7
+12	2	5
+13	2	6
+14	2	7
+15	3	26
+16	3	27
+17	4	116
+18	4	117
+19	5	120
+20	5	119
+\.
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 20, true);
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can access Wagtail admin	2	access_admin
+2	Can add document	3	add_document
+3	Can change document	3	change_document
+4	Can delete document	3	delete_document
+5	Can add image	4	add_image
+6	Can change image	4	change_image
+7	Can delete image	4	delete_image
+8	Can add log entry	5	add_logentry
+9	Can change log entry	5	change_logentry
+10	Can delete log entry	5	delete_logentry
+11	Can add permission	6	add_permission
+12	Can change permission	6	change_permission
+13	Can delete permission	6	delete_permission
+14	Can add group	7	add_group
+15	Can change group	7	change_group
+16	Can delete group	7	delete_group
+17	Can add content type	8	add_contenttype
+18	Can change content type	8	change_contenttype
+19	Can delete content type	8	delete_contenttype
+20	Can add session	9	add_session
+21	Can change session	9	change_session
+22	Can delete session	9	delete_session
+23	Can add site	10	add_site
+24	Can change site	10	change_site
+25	Can delete site	10	delete_site
+26	Can add user	11	add_user
+27	Can change user	11	change_user
+28	Can delete user	11	delete_user
+29	Can add form submission	12	add_formsubmission
+30	Can change form submission	12	change_formsubmission
+31	Can delete form submission	12	delete_formsubmission
+32	Can add redirect	13	add_redirect
+33	Can change redirect	13	change_redirect
+34	Can delete redirect	13	delete_redirect
+35	Can add embed	14	add_embed
+36	Can change embed	14	change_embed
+37	Can delete embed	14	delete_embed
+38	Can add user profile	15	add_userprofile
+39	Can change user profile	15	change_userprofile
+40	Can delete user profile	15	delete_userprofile
+41	Can add rendition	16	add_rendition
+42	Can change rendition	16	change_rendition
+43	Can delete rendition	16	delete_rendition
+44	Can add query	17	add_query
+45	Can change query	17	change_query
+46	Can delete query	17	delete_query
+47	Can add Query Daily Hits	18	add_querydailyhits
+48	Can change Query Daily Hits	18	change_querydailyhits
+49	Can delete Query Daily Hits	18	delete_querydailyhits
+50	Can add group page permission	19	add_grouppagepermission
+51	Can change group page permission	19	change_grouppagepermission
+52	Can delete group page permission	19	delete_grouppagepermission
+53	Can add site	20	add_site
+54	Can change site	20	change_site
+55	Can delete site	20	delete_site
+56	Can add collection	21	add_collection
+57	Can change collection	21	change_collection
+58	Can delete collection	21	delete_collection
+59	Can add page revision	22	add_pagerevision
+60	Can change page revision	22	change_pagerevision
+61	Can delete page revision	22	delete_pagerevision
+62	Can add page	1	add_page
+63	Can change page	1	change_page
+64	Can delete page	1	delete_page
+65	Can add page view restriction	23	add_pageviewrestriction
+66	Can change page view restriction	23	change_pageviewrestriction
+67	Can delete page view restriction	23	delete_pageviewrestriction
+68	Can add collection view restriction	24	add_collectionviewrestriction
+69	Can change collection view restriction	24	change_collectionviewrestriction
+70	Can delete collection view restriction	24	delete_collectionviewrestriction
+71	Can add group collection permission	25	add_groupcollectionpermission
+72	Can change group collection permission	25	change_groupcollectionpermission
+73	Can delete group collection permission	25	delete_groupcollectionpermission
+74	Can add social media settings	26	add_socialmediasettings
+75	Can change social media settings	26	change_socialmediasettings
+76	Can delete social media settings	26	delete_socialmediasettings
+77	Can add basic page tag	27	add_basicpagetag
+78	Can change basic page tag	27	change_basicpagetag
+79	Can delete basic page tag	27	delete_basicpagetag
+80	Can add streamfields settings	28	add_streamfieldssettings
+81	Can change streamfields settings	28	change_streamfieldssettings
+82	Can delete streamfields settings	28	delete_streamfieldssettings
+83	Can add company address settings	29	add_companyaddresssettings
+84	Can change company address settings	29	change_companyaddresssettings
+85	Can delete company address settings	29	delete_companyaddresssettings
+86	Can add google settings	30	add_googlesettings
+87	Can change google settings	30	change_googlesettings
+88	Can delete google settings	30	delete_googlesettings
+89	Can add basic page	31	add_basicpage
+90	Can change basic page	31	change_basicpage
+91	Can delete basic page	31	delete_basicpage
+92	Can add lead db	32	add_leaddb
+93	Can change lead db	32	change_leaddb
+94	Can delete lead db	32	delete_leaddb
+95	Can add product	33	add_product
+96	Can change product	33	change_product
+97	Can delete product	33	delete_product
+98	Can add tracking	34	add_tracking
+99	Can change tracking	34	change_tracking
+100	Can delete tracking	34	delete_tracking
+101	Can add Tag	35	add_tag
+102	Can change Tag	35	change_tag
+103	Can delete Tag	35	delete_tag
+104	Can add Tagged Item	36	add_taggeditem
+105	Can change Tagged Item	36	change_taggeditem
+106	Can delete Tagged Item	36	delete_taggeditem
+107	Can add RSS feed setting	37	add_rssfeedssettings
+108	Can change RSS feed setting	37	change_rssfeedssettings
+109	Can delete RSS feed setting	37	delete_rssfeedssettings
+110	Can add TOTP device	38	add_totpdevice
+111	Can change TOTP device	38	change_totpdevice
+112	Can delete TOTP device	38	delete_totpdevice
+113	Can add Token	39	add_token
+114	Can change Token	39	change_token
+115	Can delete Token	39	delete_token
+116	Can add sms template	40	add_smstemplate
+117	Can change sms template	40	change_smstemplate
+118	Can delete sms template	40	delete_smstemplate
+119	Can add topics	41	add_topics
+120	Can change topics	41	change_topics
+121	Can delete topics	41	delete_topics
+122	Can add topic	41	add_topic
+123	Can change topic	41	change_topic
+124	Can delete topic	41	delete_topic
+125	Can add bittle	42	add_bittle
+126	Can change bittle	42	change_bittle
+127	Can delete bittle	42	delete_bittle
+128	Can add string holder	43	add_stringholder
+129	Can change string holder	43	change_stringholder
+130	Can delete string holder	43	delete_stringholder
+131	Can add refer friend page	44	add_referfriendpage
+132	Can change refer friend page	44	change_referfriendpage
+133	Can delete refer friend page	44	delete_referfriendpage
+134	Can add refer friend page tag	45	add_referfriendpagetag
+135	Can change refer friend page tag	45	change_referfriendpagetag
+136	Can delete refer friend page tag	45	delete_referfriendpagetag
+137	Can add support us page	46	add_supportuspage
+138	Can change support us page	46	change_supportuspage
+139	Can delete support us page	46	delete_supportuspage
+140	Can add support us page tag	47	add_supportuspagetag
+141	Can change support us page tag	47	change_supportuspagetag
+142	Can delete support us page tag	47	delete_supportuspagetag
+143	Can add contact us page	48	add_contactuspage
+144	Can change contact us page	48	change_contactuspage
+145	Can delete contact us page	48	delete_contactuspage
+146	Can add contact us page tag	49	add_contactuspagetag
+147	Can change contact us page tag	49	change_contactuspagetag
+148	Can delete contact us page tag	49	delete_contactuspagetag
+149	Can add signup page tag	50	add_signuppagetag
+150	Can change signup page tag	50	change_signuppagetag
+151	Can delete signup page tag	50	delete_signuppagetag
+152	Can add signup page	51	add_signuppage
+153	Can change signup page	51	change_signuppage
+154	Can delete signup page	51	delete_signuppage
+155	Can add login page tag	52	add_loginpagetag
+156	Can change login page tag	52	change_loginpagetag
+157	Can delete login page tag	52	delete_loginpagetag
+158	Can add login page	53	add_loginpage
+159	Can change login page	53	change_loginpage
+160	Can delete login page	53	delete_loginpage
+161	Can add send sms link page tag	54	add_sendsmslinkpagetag
+162	Can change send sms link page tag	54	change_sendsmslinkpagetag
+163	Can delete send sms link page tag	54	delete_sendsmslinkpagetag
+164	Can add send sms link	55	add_sendsmslink
+165	Can change send sms link	55	change_sendsmslink
+166	Can delete send sms link	55	delete_sendsmslink
+167	Can add tracking	56	add_tracking
+168	Can change tracking	56	change_tracking
+169	Can delete tracking	56	delete_tracking
+\.
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 169, true);
+
+
+--
+-- Data for Name: authtoken_token; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.authtoken_token (key, created, user_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: carelineapp_basicpage; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_basicpage (page_ptr_id, author, date, body) FROM stdin;
+\.
+
+
+--
+-- Data for Name: carelineapp_basicpagetag; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_basicpagetag (id, content_object_id, tag_id) FROM stdin;
+\.
+
+
+--
+-- Name: carelineapp_basicpagetag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.carelineapp_basicpagetag_id_seq', 1, false);
+
+
+--
+-- Data for Name: carelineapp_companyaddresssettings; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_companyaddresssettings (id, company_name, building_name, street_number, street_name, town, county, postcode, pobox, phone, email, copyright, company_number, openingtimes, description_header, description_one, description_two, description_three, company_footnote, company_url, company_website_name, company_website_description, site_id) FROM stdin;
+\.
+
+
+--
+-- Name: carelineapp_companyaddresssettings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.carelineapp_companyaddresssettings_id_seq', 1, false);
+
+
+--
+-- Data for Name: carelineapp_contactuspage; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_contactuspage (page_ptr_id, author, date, phone_number, email) FROM stdin;
+\.
+
+
+--
+-- Data for Name: carelineapp_contactuspagetag; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_contactuspagetag (id, content_object_id, tag_id) FROM stdin;
+\.
+
+
+--
+-- Name: carelineapp_contactuspagetag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.carelineapp_contactuspagetag_id_seq', 1, false);
+
+
+--
+-- Data for Name: carelineapp_googlesettings; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_googlesettings (id, tagmanager, analytics, site_id) FROM stdin;
+\.
+
+
+--
+-- Name: carelineapp_googlesettings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.carelineapp_googlesettings_id_seq', 1, false);
+
+
+--
+-- Data for Name: carelineapp_loginpage; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_loginpage (page_ptr_id, author, date, email_helper_text, password_helper_text, keep_me_logged_helper_text) FROM stdin;
+\.
+
+
+--
+-- Data for Name: carelineapp_loginpagetag; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_loginpagetag (id, content_object_id, tag_id) FROM stdin;
+\.
+
+
+--
+-- Name: carelineapp_loginpagetag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.carelineapp_loginpagetag_id_seq', 1, false);
+
+
+--
+-- Data for Name: carelineapp_referfriendpage; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_referfriendpage (page_ptr_id, author, date, action_title, section_name, sub_title, helper_text_one, helper_text_two) FROM stdin;
+\.
+
+
+--
+-- Data for Name: carelineapp_referfriendpagetag; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_referfriendpagetag (id, content_object_id, tag_id) FROM stdin;
+\.
+
+
+--
+-- Name: carelineapp_referfriendpagetag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.carelineapp_referfriendpagetag_id_seq', 1, false);
+
+
+--
+-- Data for Name: carelineapp_sendsmslink; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_sendsmslink (page_ptr_id, author, date, name_helper_text, friends_mobile_number_helper_text) FROM stdin;
+\.
+
+
+--
+-- Data for Name: carelineapp_sendsmslinkpagetag; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_sendsmslinkpagetag (id, content_object_id, tag_id) FROM stdin;
+\.
+
+
+--
+-- Name: carelineapp_sendsmslinkpagetag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.carelineapp_sendsmslinkpagetag_id_seq', 1, false);
+
+
+--
+-- Data for Name: carelineapp_signuppage; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_signuppage (page_ptr_id, author, date, first_name_helper_text, last_name_helper_text, email_helper_text, mobile_helper_text, password_helper_text, agree_terms_helper_text) FROM stdin;
+\.
+
+
+--
+-- Data for Name: carelineapp_signuppagetag; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_signuppagetag (id, content_object_id, tag_id) FROM stdin;
+\.
+
+
+--
+-- Name: carelineapp_signuppagetag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.carelineapp_signuppagetag_id_seq', 1, false);
+
+
+--
+-- Data for Name: carelineapp_smstemplate; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_smstemplate (id, text, from_sms) FROM stdin;
+1	Hey {{name}}! Welcome to {{service}}. Please click on {{link}} to download more info	Careline
+\.
+
+
+--
+-- Name: carelineapp_smstemplate_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.carelineapp_smstemplate_id_seq', 1, true);
+
+
+--
+-- Data for Name: carelineapp_supportuspage; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_supportuspage (page_ptr_id, author, date, action_title, section_name, sub_title) FROM stdin;
+\.
+
+
+--
+-- Data for Name: carelineapp_supportuspagetag; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_supportuspagetag (id, content_object_id, tag_id) FROM stdin;
+\.
+
+
+--
+-- Name: carelineapp_supportuspagetag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.carelineapp_supportuspagetag_id_seq', 1, false);
+
+
+--
+-- Data for Name: carelineapp_topic; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.carelineapp_topic (id, custom_url, introduction, title, counselling_topic_id) FROM stdin;
+1	http://google.com	Introduction	Addictions	1
+\.
+
+
+--
+-- Name: carelineapp_topics_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.carelineapp_topics_id_seq', 1, true);
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+\.
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1, false);
+
+
+--
+-- Data for Name: django_bitly_bittle; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.django_bitly_bittle (id, object_id, absolute_url, hash, "shortKeywordUrl", "shortUrl", "userHash", statstring, statstamp, date_created, date_modified, content_type_id) FROM stdin;
+\.
+
+
+--
+-- Name: django_bitly_bittle_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.django_bitly_bittle_id_seq', 1, false);
+
+
+--
+-- Data for Name: django_bitly_stringholder; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.django_bitly_stringholder (id, absolute_url) FROM stdin;
+\.
+
+
+--
+-- Name: django_bitly_stringholder_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.django_bitly_stringholder_id_seq', 1, false);
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	wagtailcore	page
+2	wagtailadmin	admin
+3	wagtaildocs	document
+4	wagtailimages	image
+5	admin	logentry
+6	auth	permission
+7	auth	group
+8	contenttypes	contenttype
+9	sessions	session
+10	sites	site
+11	users	user
+12	wagtailforms	formsubmission
+13	wagtailredirects	redirect
+14	wagtailembeds	embed
+15	wagtailusers	userprofile
+16	wagtailimages	rendition
+17	wagtailsearch	query
+18	wagtailsearch	querydailyhits
+19	wagtailcore	grouppagepermission
+20	wagtailcore	site
+21	wagtailcore	collection
+22	wagtailcore	pagerevision
+23	wagtailcore	pageviewrestriction
+24	wagtailcore	collectionviewrestriction
+25	wagtailcore	groupcollectionpermission
+26	carelineapp	socialmediasettings
+27	carelineapp	basicpagetag
+28	carelineapp	streamfieldssettings
+29	carelineapp	companyaddresssettings
+30	carelineapp	googlesettings
+31	carelineapp	basicpage
+32	leads	leaddb
+33	leads	product
+34	leads	tracking
+35	taggit	tag
+36	taggit	taggeditem
+37	wagtail_feeds	rssfeedssettings
+38	otp_totp	totpdevice
+39	authtoken	token
+40	carelineapp	smstemplate
+41	carelineapp	topic
+42	django_bitly	bittle
+43	django_bitly	stringholder
+44	carelineapp	referfriendpage
+45	carelineapp	referfriendpagetag
+46	carelineapp	supportuspage
+47	carelineapp	supportuspagetag
+48	carelineapp	contactuspage
+49	carelineapp	contactuspagetag
+50	carelineapp	signuppagetag
+51	carelineapp	signuppage
+52	carelineapp	loginpagetag
+53	carelineapp	loginpage
+54	carelineapp	sendsmslinkpagetag
+55	carelineapp	sendsmslink
+56	users	tracking
+\.
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 56, true);
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2018-10-02 01:22:19.857393+00
+2	contenttypes	0002_remove_content_type_name	2018-10-02 01:22:19.874423+00
+3	auth	0001_initial	2018-10-02 01:22:19.93931+00
+4	auth	0002_alter_permission_name_max_length	2018-10-02 01:22:19.949834+00
+5	auth	0003_alter_user_email_max_length	2018-10-02 01:22:19.959846+00
+6	auth	0004_alter_user_username_opts	2018-10-02 01:22:19.969342+00
+7	auth	0005_alter_user_last_login_null	2018-10-02 01:22:19.976832+00
+8	auth	0006_require_contenttypes_0002	2018-10-02 01:22:19.97992+00
+9	auth	0007_alter_validators_add_error_messages	2018-10-02 01:22:19.987491+00
+10	auth	0008_alter_user_username_max_length	2018-10-02 01:22:19.997354+00
+11	auth	0009_alter_user_last_name_max_length	2018-10-02 01:22:20.007172+00
+12	users	0001_initial	2018-10-02 01:22:20.082643+00
+13	admin	0001_initial	2018-10-02 01:22:20.121554+00
+14	admin	0002_logentry_remove_auto_add	2018-10-02 01:22:20.134355+00
+15	wagtailcore	0001_initial	2018-10-02 01:22:20.440367+00
+16	wagtailcore	0002_initial_data	2018-10-02 01:22:20.442888+00
+17	wagtailcore	0003_add_uniqueness_constraint_on_group_page_permission	2018-10-02 01:22:20.445327+00
+18	wagtailcore	0004_page_locked	2018-10-02 01:22:20.447853+00
+19	wagtailcore	0005_add_page_lock_permission_to_moderators	2018-10-02 01:22:20.450707+00
+20	wagtailcore	0006_add_lock_page_permission	2018-10-02 01:22:20.452555+00
+21	wagtailcore	0007_page_latest_revision_created_at	2018-10-02 01:22:20.454294+00
+22	wagtailcore	0008_populate_latest_revision_created_at	2018-10-02 01:22:20.457134+00
+23	wagtailcore	0009_remove_auto_now_add_from_pagerevision_created_at	2018-10-02 01:22:20.459243+00
+24	wagtailcore	0010_change_page_owner_to_null_on_delete	2018-10-02 01:22:20.461365+00
+25	wagtailcore	0011_page_first_published_at	2018-10-02 01:22:20.463534+00
+26	wagtailcore	0012_extend_page_slug_field	2018-10-02 01:22:20.465763+00
+27	wagtailcore	0013_update_golive_expire_help_text	2018-10-02 01:22:20.467757+00
+28	wagtailcore	0014_add_verbose_name	2018-10-02 01:22:20.471396+00
+29	wagtailcore	0015_add_more_verbose_names	2018-10-02 01:22:20.474981+00
+30	wagtailcore	0016_change_page_url_path_to_text_field	2018-10-02 01:22:20.477082+00
+31	wagtailcore	0017_change_edit_page_permission_description	2018-10-02 01:22:20.491918+00
+32	wagtailcore	0018_pagerevision_submitted_for_moderation_index	2018-10-02 01:22:20.512539+00
+33	wagtailcore	0019_verbose_names_cleanup	2018-10-02 01:22:20.566972+00
+34	wagtailcore	0020_add_index_on_page_first_published_at	2018-10-02 01:22:20.592441+00
+35	wagtailcore	0021_capitalizeverbose	2018-10-02 01:22:21.052829+00
+36	wagtailcore	0022_add_site_name	2018-10-02 01:22:21.074567+00
+37	wagtailcore	0023_alter_page_revision_on_delete_behaviour	2018-10-02 01:22:21.098951+00
+38	wagtailcore	0024_collection	2018-10-02 01:22:21.124299+00
+39	wagtailcore	0025_collection_initial_data	2018-10-02 01:22:21.144758+00
+40	wagtailcore	0026_group_collection_permission	2018-10-02 01:22:21.202652+00
+41	wagtailcore	0027_fix_collection_path_collation	2018-10-02 01:22:21.230363+00
+42	wagtailcore	0024_alter_page_content_type_on_delete_behaviour	2018-10-02 01:22:21.256045+00
+43	wagtailcore	0028_merge	2018-10-02 01:22:21.259897+00
+44	wagtailcore	0029_unicode_slugfield_dj19	2018-10-02 01:22:21.27524+00
+45	wagtailcore	0030_index_on_pagerevision_created_at	2018-10-02 01:22:21.29811+00
+46	wagtailcore	0031_add_page_view_restriction_types	2018-10-02 01:22:21.37569+00
+47	wagtailcore	0032_add_bulk_delete_page_permission	2018-10-02 01:22:21.391966+00
+48	wagtailcore	0033_remove_golive_expiry_help_text	2018-10-02 01:22:21.420473+00
+49	wagtailcore	0034_page_live_revision	2018-10-02 01:22:21.45023+00
+50	wagtailcore	0035_page_last_published_at	2018-10-02 01:22:21.470156+00
+51	wagtailcore	0036_populate_page_last_published_at	2018-10-02 01:22:21.494592+00
+52	wagtailcore	0037_set_page_owner_editable	2018-10-02 01:22:21.523116+00
+53	wagtailcore	0038_make_first_published_at_editable	2018-10-02 01:22:21.541805+00
+54	wagtailcore	0039_collectionviewrestriction	2018-10-02 01:22:21.632483+00
+55	wagtailcore	0040_page_draft_title	2018-10-02 01:22:21.69713+00
+56	taggit	0001_initial	2018-10-02 01:22:21.759082+00
+57	taggit	0002_auto_20150616_2121	2018-10-02 01:22:21.7785+00
+58	carelineapp	0001_initial	2018-10-02 01:22:21.984423+00
+60	otp_totp	0001_initial	2018-10-02 01:22:22.086852+00
+61	sessions	0001_initial	2018-10-02 01:22:22.110182+00
+62	sites	0001_initial	2018-10-02 01:22:22.123422+00
+63	sites	0002_alter_domain_unique	2018-10-02 01:22:22.141544+00
+64	wagtail_feeds	0001_initial	2018-10-02 01:22:22.185437+00
+65	wagtail_feeds	0002_rssfeedssettings_feed_image_in_content	2018-10-02 01:22:22.287803+00
+66	wagtail_feeds	0003_auto_20180130_0818	2018-10-02 01:22:22.387101+00
+67	wagtail_feeds	0004_auto_20180130_0948	2018-10-02 01:22:22.5061+00
+68	wagtail_feeds	0005_auto_20180130_1152	2018-10-02 01:22:22.527406+00
+69	wagtail_feeds	0006_auto_20180216_0933	2018-10-02 01:22:22.58236+00
+70	wagtail_feeds	0007_auto_20180216_1005	2018-10-02 01:22:22.596488+00
+71	wagtailadmin	0001_create_admin_access_permissions	2018-10-02 01:22:22.652517+00
+72	wagtaildocs	0001_initial	2018-10-02 01:22:22.69676+00
+73	wagtaildocs	0002_initial_data	2018-10-02 01:22:22.760246+00
+74	wagtaildocs	0003_add_verbose_names	2018-10-02 01:22:22.822883+00
+75	wagtaildocs	0004_capitalizeverbose	2018-10-02 01:22:22.928889+00
+76	wagtaildocs	0005_document_collection	2018-10-02 01:22:22.974649+00
+77	wagtaildocs	0006_copy_document_permissions_to_collections	2018-10-02 01:22:23.030374+00
+78	wagtaildocs	0005_alter_uploaded_by_user_on_delete_action	2018-10-02 01:22:23.065944+00
+79	wagtaildocs	0007_merge	2018-10-02 01:22:23.069579+00
+80	wagtaildocs	0008_document_file_size	2018-10-02 01:22:23.190132+00
+81	wagtailembeds	0001_initial	2018-10-02 01:22:23.220615+00
+82	wagtailembeds	0002_add_verbose_names	2018-10-02 01:22:23.228561+00
+83	wagtailembeds	0003_capitalizeverbose	2018-10-02 01:22:23.23627+00
+84	wagtailforms	0001_initial	2018-10-02 01:22:23.275217+00
+85	wagtailforms	0002_add_verbose_names	2018-10-02 01:22:23.298298+00
+86	wagtailforms	0003_capitalizeverbose	2018-10-02 01:22:23.325379+00
+87	wagtailimages	0001_initial	2018-10-02 01:22:23.446831+00
+88	wagtailimages	0002_initial_data	2018-10-02 01:22:23.512042+00
+89	wagtailimages	0003_fix_focal_point_fields	2018-10-02 01:22:23.566943+00
+90	wagtailimages	0004_make_focal_point_key_not_nullable	2018-10-02 01:22:23.629156+00
+91	wagtailimages	0005_make_filter_spec_unique	2018-10-02 01:22:23.65702+00
+92	wagtailimages	0006_add_verbose_names	2018-10-02 01:22:23.729702+00
+93	wagtailimages	0007_image_file_size	2018-10-02 01:22:23.753048+00
+94	wagtailimages	0008_image_created_at_index	2018-10-02 01:22:23.781933+00
+95	wagtailimages	0009_capitalizeverbose	2018-10-02 01:22:24.059967+00
+96	wagtailimages	0010_change_on_delete_behaviour	2018-10-02 01:22:24.130735+00
+97	wagtailimages	0011_image_collection	2018-10-02 01:22:24.234908+00
+98	wagtailimages	0012_copy_image_permissions_to_collections	2018-10-02 01:22:24.31236+00
+99	wagtailimages	0013_make_rendition_upload_callable	2018-10-02 01:22:24.332686+00
+100	wagtailimages	0014_add_filter_spec_field	2018-10-02 01:22:24.529829+00
+101	wagtailimages	0015_fill_filter_spec_field	2018-10-02 01:22:24.591639+00
+102	wagtailimages	0016_deprecate_rendition_filter_relation	2018-10-02 01:22:24.679804+00
+103	wagtailimages	0017_reduce_focal_point_key_max_length	2018-10-02 01:22:24.718254+00
+104	wagtailimages	0018_remove_rendition_filter	2018-10-02 01:22:24.75184+00
+105	wagtailimages	0019_delete_filter	2018-10-02 01:22:24.764134+00
+106	wagtailimages	0020_add-verbose-name	2018-10-02 01:22:24.790725+00
+107	wagtailimages	0021_image_file_hash	2018-10-02 01:22:24.837846+00
+108	wagtailmetadata	0001_initial	2018-10-02 01:22:24.891747+00
+109	wagtailmetadata	0002_auto_20160607_2150	2018-10-02 01:22:24.940801+00
+110	wagtailmetadata	0003_auto_20160909_1000	2018-10-02 01:22:24.985849+00
+111	wagtailmetadata	0004_remove_sitemetadatapreferences	2018-10-02 01:22:25.126846+00
+112	wagtailmetadata	0005_metadatasettings	2018-10-02 01:22:25.178426+00
+113	wagtailmetadata	0006_drop_metadatasettings	2018-10-02 01:22:25.217666+00
+114	wagtailredirects	0001_initial	2018-10-02 01:22:25.271112+00
+115	wagtailredirects	0002_add_verbose_names	2018-10-02 01:22:25.327071+00
+116	wagtailredirects	0003_make_site_field_editable	2018-10-02 01:22:25.370513+00
+117	wagtailredirects	0004_set_unique_on_path_and_site	2018-10-02 01:22:25.428395+00
+118	wagtailredirects	0005_capitalizeverbose	2018-10-02 01:22:25.562875+00
+119	wagtailredirects	0006_redirect_increase_max_length	2018-10-02 01:22:25.602057+00
+120	wagtailsearch	0001_initial	2018-10-02 01:22:25.836906+00
+121	wagtailsearch	0002_add_verbose_names	2018-10-02 01:22:25.916439+00
+122	wagtailsearch	0003_remove_editors_pick	2018-10-02 01:22:25.949547+00
+123	wagtailusers	0001_initial	2018-10-02 01:22:26.039932+00
+124	wagtailusers	0002_add_verbose_name_on_userprofile	2018-10-02 01:22:26.105308+00
+125	wagtailusers	0003_add_verbose_names	2018-10-02 01:22:26.126866+00
+126	wagtailusers	0004_capitalizeverbose	2018-10-02 01:22:26.194006+00
+127	wagtailusers	0005_make_related_name_wagtail_specific	2018-10-02 01:22:26.231028+00
+128	wagtailusers	0006_userprofile_prefered_language	2018-10-02 01:22:26.267356+00
+129	wagtailusers	0007_userprofile_current_time_zone	2018-10-02 01:22:26.300756+00
+130	wagtailusers	0008_userprofile_avatar	2018-10-02 01:22:26.33314+00
+131	wagtailcore	0001_squashed_0016_change_page_url_path_to_text_field	2018-10-02 01:22:26.338503+00
+132	authtoken	0001_initial	2018-10-02 01:31:18.593281+00
+133	authtoken	0002_auto_20160226_1747	2018-10-02 01:31:18.686192+00
+134	users	0002_auto_20181002_0135	2018-10-02 01:36:00.734474+00
+135	users	0003_auto_20181002_0207	2018-10-02 02:08:02.775732+00
+137	carelineapp	0002_smstemplate	2018-10-02 05:28:37.382043+00
+138	carelineapp	0003_auto_20181002_0529	2018-10-02 05:29:42.223973+00
+139	carelineapp	0004_auto_20181002_0530	2018-10-02 05:31:02.174804+00
+140	carelineapp	0005_auto_20181002_0552	2018-10-02 05:52:55.348372+00
+142	carelineapp	0006_auto_20181002_0554	2018-10-02 05:54:39.126953+00
+143	carelineapp	0007_auto_20181002_0557	2018-10-02 05:58:04.13079+00
+144	carelineapp	0008_topic_counselling_topic	2018-10-02 06:01:49.831244+00
+145	carelineapp	0009_auto_20181002_0604	2018-10-02 06:04:36.26408+00
+146	django_bitly	0001_initial	2018-10-02 22:44:23.183911+00
+150	carelineapp	0010_auto_20181003_0056	2018-10-03 00:56:21.853702+00
+156	carelineapp	0011_auto_20181004_0019	2018-10-04 00:19:55.361347+00
+157	carelineapp	0012_auto_20181004_0031	2018-10-04 00:31:09.767278+00
+158	carelineapp	0013_auto_20181004_0051	2018-10-04 00:52:00.512082+00
+159	carelineapp	0014_auto_20181004_0053	2018-10-04 00:54:02.367891+00
+160	carelineapp	0015_auto_20181004_0118	2018-10-04 01:19:36.309459+00
+161	carelineapp	0016_auto_20181004_0119	2018-10-04 01:19:36.335822+00
+162	carelineapp	0017_auto_20181004_0119	2018-10-04 01:19:36.388019+00
+163	carelineapp	0018_auto_20181004_0130	2018-10-04 01:30:12.32311+00
+164	carelineapp	0019_auto_20181004_0132	2018-10-04 01:32:44.981325+00
+165	carelineapp	0020_auto_20181004_0139	2018-10-04 01:39:25.956292+00
+166	carelineapp	0021_auto_20181004_0148	2018-10-04 01:48:41.770424+00
+167	carelineapp	0022_auto_20181004_0154	2018-10-04 01:55:02.482262+00
+171	leads	0001_initial	2018-10-15 09:00:19.711785+00
+173	users	0004_auto_20181015_0915	2018-10-15 09:15:27.383309+00
+174	leads	0002_leaddb_user	2018-10-15 09:49:43.531811+00
+175	leads	0003_auto_20181015_1006	2018-10-15 10:06:06.567527+00
+\.
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 175, true);
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+w8gpz54vnpj7wa2zpy186pwuakxc2kp6	NjYwMjRkYTRiMjExZTkwZTVlYTg4YTUxOTUwODMwYWI0MWIxODA2ODp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI3YjY3MDM0Y2I5Mjc1ZDIyMDNmYjU4N2E0ZTNkOTgyYzRiMzM4YTM5In0=	2018-10-16 04:51:36.148389+00
+2yypyu3rm6vatbvui0x37313lt6vzukw	NjYwMjRkYTRiMjExZTkwZTVlYTg4YTUxOTUwODMwYWI0MWIxODA2ODp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI3YjY3MDM0Y2I5Mjc1ZDIyMDNmYjU4N2E0ZTNkOTgyYzRiMzM4YTM5In0=	2018-10-18 02:28:01.662892+00
+pky3nh7c9krhxwldyphno5q8bsx42vze	NjYwMjRkYTRiMjExZTkwZTVlYTg4YTUxOTUwODMwYWI0MWIxODA2ODp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI3YjY3MDM0Y2I5Mjc1ZDIyMDNmYjU4N2E0ZTNkOTgyYzRiMzM4YTM5In0=	2018-10-20 01:40:58.351141+00
+ag1c4wacpw8fdq3ax7np2087j13f4k91	MDU4NDQ1YjdhZjhkNzhhZTJlMDJhZjFhNmZmM2E0NmJhMmI4YjZiMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIyMjk4MTM1ZWY2ZTg5ZTRlZmY1Njc3NDYwY2Q2MTdjODhlYjRhODJlIn0=	2018-10-29 09:21:17.553091+00
+\.
+
+
+--
+-- Data for Name: django_site; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.django_site (id, domain, name) FROM stdin;
+1	example.com	example.com
+\.
+
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.django_site_id_seq', 1, true);
+
+
+--
+-- Data for Name: leads_leaddb; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.leads_leaddb (leadid, recipient_contact_name, recipient_contact_number, referral_text_message_reason, date_time_referral, text_message_body, callback_permission, recipient_permission, bitly_link, bitly_link_clicked, twilio_sms_sid, careline_topic_id, user_id) FROM stdin;
+2ce80fbb-ff49-4fee-a3cd-917251cb6187	Joe	0424807835	some reason	2018-09-15 05:53:00+00	\N	f	f	\N	f	\N	1	\N
+ef10a308-fb96-405d-a14a-f087ab3c7250	Joe	0424807835	some reason	2018-09-15 05:53:00+00	\N	f	f	https://careline.app/2ykYosA	f	\N	1	2
+6142b3dc-c0da-4fdd-ad51-e78b2c429abe	Joe	0424807835	some reason	2018-09-15 05:53:00+00	\N	t	t	https://careline.app/2yFPzsL	t	SM43726ebbad4f48a9b755837b787d7c79	1	2
+4336e95e-f68c-46f7-b7b1-617fb3e03dcf	Joe	0424807835	some reason	2018-09-15 05:53:00+00	\N	t	f	https://careline.app/2yFutLj	f	\N	1	2
+387dc68a-5541-4785-87f0-47fdcb92d185	Joe	0424807835	some reason	2018-09-15 05:53:00+00	\N	f	f	https://careline.app/2yEB5cB	f	\N	1	2
+1913cf44-8500-4799-a914-073438a364f0	Joe	0424807835	some reason	2018-09-15 05:53:00+00	\N	t	f	https://careline.app/2yhB4vU	f	\N	1	2
+03efa4ba-8669-41a6-9d99-249fc20eb76d	Joe	0424807835	some reason	2018-09-15 05:53:00+00	\N	f	f	https://careline.app/2yF2KKF	f	\N	1	2
+\.
+
+
+--
+-- Data for Name: leads_tracking; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.leads_tracking (id, created_time, updated_time, landed_time, apilevel, application_name, brand, build_number, bundle_id, carrier, device_country, device_id, device_locale, device_name, first_install_time, font_scale, free_disk_storage, ip_address, install_referrer, instance_id, last_update_time, mac_address, manufacturer, max_memory, model, phone_number, readable_version, serial_number, system_name, system_version, timezone, total_disk_capacity, total_memory, unique_id, useragent, version, twenty_four_hour, emulator, pin_or_fingerprint_set, tablet, latitude, longitude, ticket_ref) FROM stdin;
+\.
+
+
+--
+-- Name: leads_tracking_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.leads_tracking_id_seq', 1, false);
+
+
+--
+-- Data for Name: otp_totp_totpdevice; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.otp_totp_totpdevice (id, name, confirmed, key, step, t0, digits, tolerance, drift, last_t, user_id) FROM stdin;
+\.
+
+
+--
+-- Name: otp_totp_totpdevice_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.otp_totp_totpdevice_id_seq', 1, false);
+
+
+--
+-- Data for Name: taggit_tag; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.taggit_tag (id, name, slug) FROM stdin;
+1	Addictions	addictions
+2	Become a foster carer	become-a-foster-carer
+3	Become a volunteer	become-a-volunteer
+4	Counselling	counselling
+5	Disability Support	disability-support
+6	Domestic and family violence	domestic-and-family-violence
+7	Help for children	help-for-children
+8	Help for young people at risk	help-for-young-people-at-risk
+9	Marriage preparation courses	marriage-preparation-courses
+10	Parenting help	parenting-help
+11	Relationship concerns	relationship-concerns
+12	Seniors help at home	seniors-help-at-home
+14	Disability support	disability-support_1
+16	Relationship Concerns	relationship-concerns_1
+\.
+
+
+--
+-- Name: taggit_tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.taggit_tag_id_seq', 16, true);
+
+
+--
+-- Data for Name: taggit_taggeditem; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.taggit_taggeditem (id, object_id, content_type_id, tag_id) FROM stdin;
+13	13	3	1
+14	14	3	2
+15	15	3	3
+16	16	3	4
+17	17	3	14
+18	18	3	6
+19	19	3	7
+20	20	3	8
+21	21	3	9
+22	22	3	10
+23	23	3	16
+24	24	3	12
+\.
+
+
+--
+-- Name: taggit_taggeditem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.taggit_taggeditem_id_seq', 24, true);
+
+
+--
+-- Data for Name: users_tracking; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.users_tracking (id, created_time, updated_time, landed_time, apilevel, application_name, brand, build_number, bundle_id, carrier, device_country, device_id, device_locale, device_name, first_install_time, font_scale, free_disk_storage, ip_address, install_referrer, instance_id, last_update_time, mac_address, manufacturer, max_memory, model, phone_number, readable_version, serial_number, system_name, system_version, timezone, total_disk_capacity, total_memory, unique_id, useragent, version, twenty_four_hour, emulator, pin_or_fingerprint_set, tablet, latitude, longitude, ticket_ref) FROM stdin;
+1	2018-10-15 09:16:08.804131+00	2018-10-15 09:16:08.80416+00	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f	f	f	f	\N	\N	\N
+3	2018-10-15 09:20:03.530744+00	2018-10-15 09:20:03.530771+00	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	f	f	f	f	\N	\N	\N
+2	2018-10-15 09:20:03.455313+00	2018-10-15 09:37:59.863885+00	2018-09-15 05:53:00+00	25	Learnium Mobile	Apple	89	com.learnium.mobile	SOFTBANK	AU	iPhone7,2	en	Becca's iPhone 6	1517681764528	1.20	17179869184	92.168.32.44	my_install_referrer	135113511513153	1517681764992	E5:12:D8:E5:69:9	Apple	402653183	?	0424807835	1.0.1	undefined	iOS	11.0	Africa/Tunis	17179869184	1995018240	FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F9	Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143	1.0	t	f	f	f	-37.917304	145.4515276	9690871082
+5	2018-10-15 09:43:05.436771+00	2018-10-15 09:43:50.068036+00	2018-09-15 05:53:00+00	25	Learnium Mobile	Apple	89	com.learnium.mobile	SOFTBANK	AU	iPhone7,2	en	Becca's iPhone 6	1517681764528	1.20	17179869184	92.168.32.44	my_install_referrer	135113511513153	1517681764992	E5:12:D8:E5:69:9	Apple	402653183	?	0424807835	1.0.1	undefined	iOS	11.0	Africa/Tunis	17179869184	1995018240	FCDBD8EF-62FC-4ECB-B2F5-92C9E79AC7F9	Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143	1.0	t	f	f	f	-37.917304	145.4515276	9878708999
+\.
+
+
+--
+-- Name: users_tracking_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.users_tracking_id_seq', 5, true);
+
+
+--
+-- Data for Name: users_user; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.users_user (password, last_login, is_superuser, email, is_staff, is_active, date_joined, first_name, last_name, mobile, tracking_ptr_id) FROM stdin;
+	\N	f		f	t	2018-10-15 09:20:03.530401+00	matt	millen	423083811	3
+pbkdf2_sha256$100000$Jb3lmI7rcYxJ$0dcwDNsMSI4wEBcWUV/nSw3f0VQkQooKYwn26Pff2lk=	2018-10-15 09:21:17.536736+00	t	matt.millen@icloud.com	t	t	2018-10-15 09:16:08.7352+00			\N	1
+	\N	f	matt.millen@me.com	f	t	2018-10-15 09:20:03.454984+00	Test	Last	423083811	2
+	\N	f	testuser@gmail.com	f	t	2018-10-15 09:43:05.436422+00	Test	Last	423083811	5
+\.
+
+
+--
+-- Data for Name: users_user_groups; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.users_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Name: users_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.users_user_groups_id_seq', 1, false);
+
+
+--
+-- Data for Name: users_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.users_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: users_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.users_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: wagtail_feeds_rssfeedssettings; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtail_feeds_rssfeedssettings (id, feed_app_label, feed_model_name, feed_title, feed_link, feed_description, feed_author_email, feed_author_link, feed_item_description_field, feed_item_content_field, site_id, feed_image_in_content, feed_item_date_field, is_feed_item_date_field_datetime) FROM stdin;
+\.
+
+
+--
+-- Name: wagtail_feeds_rssfeedssettings_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtail_feeds_rssfeedssettings_id_seq', 1, false);
+
+
+--
+-- Data for Name: wagtailcore_collection; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailcore_collection (id, path, depth, numchild, name) FROM stdin;
+2	00010001	2	0	Topic PDFS
+1	0001	1	1	Root
+\.
+
+
+--
+-- Name: wagtailcore_collection_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailcore_collection_id_seq', 2, true);
+
+
+--
+-- Data for Name: wagtailcore_collectionviewrestriction; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailcore_collectionviewrestriction (id, restriction_type, password, collection_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: wagtailcore_collectionviewrestriction_groups; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailcore_collectionviewrestriction_groups (id, collectionviewrestriction_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Name: wagtailcore_collectionviewrestriction_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailcore_collectionviewrestriction_groups_id_seq', 1, false);
+
+
+--
+-- Name: wagtailcore_collectionviewrestriction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailcore_collectionviewrestriction_id_seq', 1, false);
+
+
+--
+-- Data for Name: wagtailcore_groupcollectionpermission; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailcore_groupcollectionpermission (id, collection_id, group_id, permission_id) FROM stdin;
+1	1	1	2
+2	1	2	2
+3	1	1	3
+4	1	2	3
+5	1	1	5
+6	1	2	5
+7	1	1	6
+8	1	2	6
+\.
+
+
+--
+-- Name: wagtailcore_groupcollectionpermission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailcore_groupcollectionpermission_id_seq', 8, true);
+
+
+--
+-- Data for Name: wagtailcore_grouppagepermission; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailcore_grouppagepermission (id, permission_type, group_id, page_id) FROM stdin;
+\.
+
+
+--
+-- Name: wagtailcore_grouppagepermission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailcore_grouppagepermission_id_seq', 1, false);
+
+
+--
+-- Data for Name: wagtailcore_page; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailcore_page (id, path, depth, numchild, title, slug, live, has_unpublished_changes, url_path, seo_title, show_in_menus, search_description, go_live_at, expire_at, expired, content_type_id, owner_id, locked, latest_revision_created_at, first_published_at, live_revision_id, last_published_at, draft_title) FROM stdin;
+\.
+
+
+--
+-- Name: wagtailcore_page_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailcore_page_id_seq', 1, false);
+
+
+--
+-- Data for Name: wagtailcore_pagerevision; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailcore_pagerevision (id, submitted_for_moderation, created_at, content_json, approved_go_live_at, page_id, user_id) FROM stdin;
+\.
+
+
+--
+-- Name: wagtailcore_pagerevision_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailcore_pagerevision_id_seq', 1, false);
+
+
+--
+-- Data for Name: wagtailcore_pageviewrestriction; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailcore_pageviewrestriction (id, password, page_id, restriction_type) FROM stdin;
+\.
+
+
+--
+-- Data for Name: wagtailcore_pageviewrestriction_groups; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailcore_pageviewrestriction_groups (id, pageviewrestriction_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Name: wagtailcore_pageviewrestriction_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailcore_pageviewrestriction_groups_id_seq', 1, false);
+
+
+--
+-- Name: wagtailcore_pageviewrestriction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailcore_pageviewrestriction_id_seq', 1, false);
+
+
+--
+-- Data for Name: wagtailcore_site; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailcore_site (id, hostname, port, is_default_site, root_page_id, site_name) FROM stdin;
+\.
+
+
+--
+-- Name: wagtailcore_site_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailcore_site_id_seq', 1, false);
+
+
+--
+-- Data for Name: wagtaildocs_document; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtaildocs_document (id, title, file, created_at, uploaded_by_user_id, collection_id, file_size) FROM stdin;
+1	addictions.pdf	documents/addictions_SHicQ9d.pdf	2018-10-15 10:04:00.668249+00	1	2	8399
+\.
+
+
+--
+-- Name: wagtaildocs_document_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtaildocs_document_id_seq', 1, true);
+
+
+--
+-- Data for Name: wagtailembeds_embed; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailembeds_embed (id, url, max_width, type, html, title, author_name, provider_name, thumbnail_url, width, height, last_updated) FROM stdin;
+\.
+
+
+--
+-- Name: wagtailembeds_embed_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailembeds_embed_id_seq', 1, false);
+
+
+--
+-- Data for Name: wagtailforms_formsubmission; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailforms_formsubmission (id, form_data, submit_time, page_id) FROM stdin;
+\.
+
+
+--
+-- Name: wagtailforms_formsubmission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailforms_formsubmission_id_seq', 1, false);
+
+
+--
+-- Data for Name: wagtailimages_image; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailimages_image (id, title, file, width, height, created_at, focal_point_x, focal_point_y, focal_point_width, focal_point_height, uploaded_by_user_id, file_size, collection_id, file_hash) FROM stdin;
+\.
+
+
+--
+-- Name: wagtailimages_image_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailimages_image_id_seq', 1, false);
+
+
+--
+-- Data for Name: wagtailimages_rendition; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailimages_rendition (id, file, width, height, focal_point_key, image_id, filter_spec) FROM stdin;
+\.
+
+
+--
+-- Name: wagtailimages_rendition_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailimages_rendition_id_seq', 1, false);
+
+
+--
+-- Data for Name: wagtailredirects_redirect; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailredirects_redirect (id, old_path, is_permanent, redirect_link, redirect_page_id, site_id) FROM stdin;
+\.
+
+
+--
+-- Name: wagtailredirects_redirect_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailredirects_redirect_id_seq', 1, false);
+
+
+--
+-- Data for Name: wagtailsearch_editorspick; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailsearch_editorspick (id, sort_order, description, page_id, query_id) FROM stdin;
+\.
+
+
+--
+-- Name: wagtailsearch_editorspick_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailsearch_editorspick_id_seq', 1, false);
+
+
+--
+-- Data for Name: wagtailsearch_query; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailsearch_query (id, query_string) FROM stdin;
+\.
+
+
+--
+-- Name: wagtailsearch_query_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailsearch_query_id_seq', 1, false);
+
+
+--
+-- Data for Name: wagtailsearch_querydailyhits; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailsearch_querydailyhits (id, date, hits, query_id) FROM stdin;
+\.
+
+
+--
+-- Name: wagtailsearch_querydailyhits_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailsearch_querydailyhits_id_seq', 1, false);
+
+
+--
+-- Data for Name: wagtailusers_userprofile; Type: TABLE DATA; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+COPY public.wagtailusers_userprofile (id, submitted_notifications, approved_notifications, rejected_notifications, user_id, preferred_language, current_time_zone, avatar) FROM stdin;
+\.
+
+
+--
+-- Name: wagtailusers_userprofile_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+SELECT pg_catalog.setval('public.wagtailusers_userprofile_id_seq', 1, false);
+
+
+--
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: authtoken_token authtoken_token_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.authtoken_token
+    ADD CONSTRAINT authtoken_token_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: authtoken_token authtoken_token_user_id_key; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.authtoken_token
+    ADD CONSTRAINT authtoken_token_user_id_key UNIQUE (user_id);
+
+
+--
+-- Name: carelineapp_basicpage carelineapp_basicpage_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_basicpage
+    ADD CONSTRAINT carelineapp_basicpage_pkey PRIMARY KEY (page_ptr_id);
+
+
+--
+-- Name: carelineapp_basicpagetag carelineapp_basicpagetag_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_basicpagetag
+    ADD CONSTRAINT carelineapp_basicpagetag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: carelineapp_companyaddresssettings carelineapp_companyaddresssettings_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_companyaddresssettings
+    ADD CONSTRAINT carelineapp_companyaddresssettings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: carelineapp_companyaddresssettings carelineapp_companyaddresssettings_site_id_key; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_companyaddresssettings
+    ADD CONSTRAINT carelineapp_companyaddresssettings_site_id_key UNIQUE (site_id);
+
+
+--
+-- Name: carelineapp_contactuspage carelineapp_contactuspage_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_contactuspage
+    ADD CONSTRAINT carelineapp_contactuspage_pkey PRIMARY KEY (page_ptr_id);
+
+
+--
+-- Name: carelineapp_contactuspagetag carelineapp_contactuspagetag_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_contactuspagetag
+    ADD CONSTRAINT carelineapp_contactuspagetag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: carelineapp_googlesettings carelineapp_googlesettings_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_googlesettings
+    ADD CONSTRAINT carelineapp_googlesettings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: carelineapp_googlesettings carelineapp_googlesettings_site_id_key; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_googlesettings
+    ADD CONSTRAINT carelineapp_googlesettings_site_id_key UNIQUE (site_id);
+
+
+--
+-- Name: carelineapp_loginpage carelineapp_loginpage_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_loginpage
+    ADD CONSTRAINT carelineapp_loginpage_pkey PRIMARY KEY (page_ptr_id);
+
+
+--
+-- Name: carelineapp_loginpagetag carelineapp_loginpagetag_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_loginpagetag
+    ADD CONSTRAINT carelineapp_loginpagetag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: carelineapp_referfriendpage carelineapp_referfriendpage_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_referfriendpage
+    ADD CONSTRAINT carelineapp_referfriendpage_pkey PRIMARY KEY (page_ptr_id);
+
+
+--
+-- Name: carelineapp_referfriendpagetag carelineapp_referfriendpagetag_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_referfriendpagetag
+    ADD CONSTRAINT carelineapp_referfriendpagetag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: carelineapp_sendsmslink carelineapp_sendsmslink_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_sendsmslink
+    ADD CONSTRAINT carelineapp_sendsmslink_pkey PRIMARY KEY (page_ptr_id);
+
+
+--
+-- Name: carelineapp_sendsmslinkpagetag carelineapp_sendsmslinkpagetag_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_sendsmslinkpagetag
+    ADD CONSTRAINT carelineapp_sendsmslinkpagetag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: carelineapp_signuppage carelineapp_signuppage_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_signuppage
+    ADD CONSTRAINT carelineapp_signuppage_pkey PRIMARY KEY (page_ptr_id);
+
+
+--
+-- Name: carelineapp_signuppagetag carelineapp_signuppagetag_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_signuppagetag
+    ADD CONSTRAINT carelineapp_signuppagetag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: carelineapp_smstemplate carelineapp_smstemplate_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_smstemplate
+    ADD CONSTRAINT carelineapp_smstemplate_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: carelineapp_supportuspage carelineapp_supportuspage_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_supportuspage
+    ADD CONSTRAINT carelineapp_supportuspage_pkey PRIMARY KEY (page_ptr_id);
+
+
+--
+-- Name: carelineapp_supportuspagetag carelineapp_supportuspagetag_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_supportuspagetag
+    ADD CONSTRAINT carelineapp_supportuspagetag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: carelineapp_topic carelineapp_topics_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_topic
+    ADD CONSTRAINT carelineapp_topics_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_bitly_bittle django_bitly_bittle_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.django_bitly_bittle
+    ADD CONSTRAINT django_bitly_bittle_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_bitly_stringholder django_bitly_stringholder_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.django_bitly_stringholder
+    ADD CONSTRAINT django_bitly_stringholder_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: django_site django_site_domain_a2e37b91_uniq; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.django_site
+    ADD CONSTRAINT django_site_domain_a2e37b91_uniq UNIQUE (domain);
+
+
+--
+-- Name: django_site django_site_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.django_site
+    ADD CONSTRAINT django_site_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: leads_leaddb leads_leaddb_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.leads_leaddb
+    ADD CONSTRAINT leads_leaddb_pkey PRIMARY KEY (leadid);
+
+
+--
+-- Name: leads_tracking leads_tracking_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.leads_tracking
+    ADD CONSTRAINT leads_tracking_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: otp_totp_totpdevice otp_totp_totpdevice_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.otp_totp_totpdevice
+    ADD CONSTRAINT otp_totp_totpdevice_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: taggit_tag taggit_tag_name_key; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.taggit_tag
+    ADD CONSTRAINT taggit_tag_name_key UNIQUE (name);
+
+
+--
+-- Name: taggit_tag taggit_tag_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.taggit_tag
+    ADD CONSTRAINT taggit_tag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: taggit_tag taggit_tag_slug_key; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.taggit_tag
+    ADD CONSTRAINT taggit_tag_slug_key UNIQUE (slug);
+
+
+--
+-- Name: taggit_taggeditem taggit_taggeditem_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.taggit_taggeditem
+    ADD CONSTRAINT taggit_taggeditem_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_tracking users_tracking_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.users_tracking
+    ADD CONSTRAINT users_tracking_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_user users_user_email_243f6e77_uniq; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.users_user
+    ADD CONSTRAINT users_user_email_243f6e77_uniq UNIQUE (email);
+
+
+--
+-- Name: users_user_groups users_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.users_user_groups
+    ADD CONSTRAINT users_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_user_groups users_user_groups_user_id_group_id_b88eab82_uniq; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.users_user_groups
+    ADD CONSTRAINT users_user_groups_user_id_group_id_b88eab82_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: users_user users_user_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.users_user
+    ADD CONSTRAINT users_user_pkey PRIMARY KEY (tracking_ptr_id);
+
+
+--
+-- Name: users_user_user_permissions users_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.users_user_user_permissions
+    ADD CONSTRAINT users_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_user_user_permissions users_user_user_permissions_user_id_permission_id_43338c45_uniq; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.users_user_user_permissions
+    ADD CONSTRAINT users_user_user_permissions_user_id_permission_id_43338c45_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: wagtail_feeds_rssfeedssettings wagtail_feeds_rssfeedssettings_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtail_feeds_rssfeedssettings
+    ADD CONSTRAINT wagtail_feeds_rssfeedssettings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtail_feeds_rssfeedssettings wagtail_feeds_rssfeedssettings_site_id_key; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtail_feeds_rssfeedssettings
+    ADD CONSTRAINT wagtail_feeds_rssfeedssettings_site_id_key UNIQUE (site_id);
+
+
+--
+-- Name: wagtailcore_collection wagtailcore_collection_path_key; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_collection
+    ADD CONSTRAINT wagtailcore_collection_path_key UNIQUE (path);
+
+
+--
+-- Name: wagtailcore_collection wagtailcore_collection_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_collection
+    ADD CONSTRAINT wagtailcore_collection_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailcore_collectionviewrestriction_groups wagtailcore_collectionvi_collectionviewrestrictio_988995ae_uniq; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_collectionviewrestriction_groups
+    ADD CONSTRAINT wagtailcore_collectionvi_collectionviewrestrictio_988995ae_uniq UNIQUE (collectionviewrestriction_id, group_id);
+
+
+--
+-- Name: wagtailcore_collectionviewrestriction_groups wagtailcore_collectionviewrestriction_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_collectionviewrestriction_groups
+    ADD CONSTRAINT wagtailcore_collectionviewrestriction_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailcore_collectionviewrestriction wagtailcore_collectionviewrestriction_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_collectionviewrestriction
+    ADD CONSTRAINT wagtailcore_collectionviewrestriction_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailcore_groupcollectionpermission wagtailcore_groupcollect_group_id_collection_id_p_a21cefe9_uniq; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_groupcollectionpermission
+    ADD CONSTRAINT wagtailcore_groupcollect_group_id_collection_id_p_a21cefe9_uniq UNIQUE (group_id, collection_id, permission_id);
+
+
+--
+-- Name: wagtailcore_groupcollectionpermission wagtailcore_groupcollectionpermission_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_groupcollectionpermission
+    ADD CONSTRAINT wagtailcore_groupcollectionpermission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailcore_grouppagepermission wagtailcore_grouppageper_group_id_page_id_permiss_0898bdf8_uniq; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_grouppagepermission
+    ADD CONSTRAINT wagtailcore_grouppageper_group_id_page_id_permiss_0898bdf8_uniq UNIQUE (group_id, page_id, permission_type);
+
+
+--
+-- Name: wagtailcore_grouppagepermission wagtailcore_grouppagepermission_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_grouppagepermission
+    ADD CONSTRAINT wagtailcore_grouppagepermission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailcore_page wagtailcore_page_path_key; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_page
+    ADD CONSTRAINT wagtailcore_page_path_key UNIQUE (path);
+
+
+--
+-- Name: wagtailcore_page wagtailcore_page_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_page
+    ADD CONSTRAINT wagtailcore_page_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailcore_pagerevision wagtailcore_pagerevision_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_pagerevision
+    ADD CONSTRAINT wagtailcore_pagerevision_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailcore_pageviewrestriction_groups wagtailcore_pageviewrest_pageviewrestriction_id_g_d23f80bb_uniq; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_pageviewrestriction_groups
+    ADD CONSTRAINT wagtailcore_pageviewrest_pageviewrestriction_id_g_d23f80bb_uniq UNIQUE (pageviewrestriction_id, group_id);
+
+
+--
+-- Name: wagtailcore_pageviewrestriction_groups wagtailcore_pageviewrestriction_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_pageviewrestriction_groups
+    ADD CONSTRAINT wagtailcore_pageviewrestriction_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailcore_pageviewrestriction wagtailcore_pageviewrestriction_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_pageviewrestriction
+    ADD CONSTRAINT wagtailcore_pageviewrestriction_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailcore_site wagtailcore_site_hostname_port_2c626d70_uniq; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_site
+    ADD CONSTRAINT wagtailcore_site_hostname_port_2c626d70_uniq UNIQUE (hostname, port);
+
+
+--
+-- Name: wagtailcore_site wagtailcore_site_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_site
+    ADD CONSTRAINT wagtailcore_site_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtaildocs_document wagtaildocs_document_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtaildocs_document
+    ADD CONSTRAINT wagtaildocs_document_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailembeds_embed wagtailembeds_embed_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailembeds_embed
+    ADD CONSTRAINT wagtailembeds_embed_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailembeds_embed wagtailembeds_embed_url_max_width_8a2922d8_uniq; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailembeds_embed
+    ADD CONSTRAINT wagtailembeds_embed_url_max_width_8a2922d8_uniq UNIQUE (url, max_width);
+
+
+--
+-- Name: wagtailforms_formsubmission wagtailforms_formsubmission_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailforms_formsubmission
+    ADD CONSTRAINT wagtailforms_formsubmission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailimages_image wagtailimages_image_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailimages_image
+    ADD CONSTRAINT wagtailimages_image_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailimages_rendition wagtailimages_rendition_image_id_filter_spec_foc_323c8fe0_uniq; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailimages_rendition
+    ADD CONSTRAINT wagtailimages_rendition_image_id_filter_spec_foc_323c8fe0_uniq UNIQUE (image_id, filter_spec, focal_point_key);
+
+
+--
+-- Name: wagtailimages_rendition wagtailimages_rendition_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailimages_rendition
+    ADD CONSTRAINT wagtailimages_rendition_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailredirects_redirect wagtailredirects_redirect_old_path_site_id_783622d7_uniq; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailredirects_redirect
+    ADD CONSTRAINT wagtailredirects_redirect_old_path_site_id_783622d7_uniq UNIQUE (old_path, site_id);
+
+
+--
+-- Name: wagtailredirects_redirect wagtailredirects_redirect_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailredirects_redirect
+    ADD CONSTRAINT wagtailredirects_redirect_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailsearch_editorspick wagtailsearch_editorspick_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailsearch_editorspick
+    ADD CONSTRAINT wagtailsearch_editorspick_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailsearch_query wagtailsearch_query_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailsearch_query
+    ADD CONSTRAINT wagtailsearch_query_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailsearch_query wagtailsearch_query_query_string_key; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailsearch_query
+    ADD CONSTRAINT wagtailsearch_query_query_string_key UNIQUE (query_string);
+
+
+--
+-- Name: wagtailsearch_querydailyhits wagtailsearch_querydailyhits_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailsearch_querydailyhits
+    ADD CONSTRAINT wagtailsearch_querydailyhits_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailsearch_querydailyhits wagtailsearch_querydailyhits_query_id_date_1dd232e6_uniq; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailsearch_querydailyhits
+    ADD CONSTRAINT wagtailsearch_querydailyhits_query_id_date_1dd232e6_uniq UNIQUE (query_id, date);
+
+
+--
+-- Name: wagtailusers_userprofile wagtailusers_userprofile_pkey; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailusers_userprofile
+    ADD CONSTRAINT wagtailusers_userprofile_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wagtailusers_userprofile wagtailusers_userprofile_user_id_key; Type: CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailusers_userprofile
+    ADD CONSTRAINT wagtailusers_userprofile_user_id_key UNIQUE (user_id);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: authtoken_token_key_10f0b77e_like; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX authtoken_token_key_10f0b77e_like ON public.authtoken_token USING btree (key varchar_pattern_ops);
+
+
+--
+-- Name: carelineapp_basicpagetag_content_object_id_91ddad5b; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX carelineapp_basicpagetag_content_object_id_91ddad5b ON public.carelineapp_basicpagetag USING btree (content_object_id);
+
+
+--
+-- Name: carelineapp_basicpagetag_tag_id_32aa1420; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX carelineapp_basicpagetag_tag_id_32aa1420 ON public.carelineapp_basicpagetag USING btree (tag_id);
+
+
+--
+-- Name: carelineapp_contactuspagetag_content_object_id_89570ff3; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX carelineapp_contactuspagetag_content_object_id_89570ff3 ON public.carelineapp_contactuspagetag USING btree (content_object_id);
+
+
+--
+-- Name: carelineapp_contactuspagetag_tag_id_6a2d26ea; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX carelineapp_contactuspagetag_tag_id_6a2d26ea ON public.carelineapp_contactuspagetag USING btree (tag_id);
+
+
+--
+-- Name: carelineapp_loginpagetag_content_object_id_ee643841; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX carelineapp_loginpagetag_content_object_id_ee643841 ON public.carelineapp_loginpagetag USING btree (content_object_id);
+
+
+--
+-- Name: carelineapp_loginpagetag_tag_id_861dd7c0; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX carelineapp_loginpagetag_tag_id_861dd7c0 ON public.carelineapp_loginpagetag USING btree (tag_id);
+
+
+--
+-- Name: carelineapp_referfriendpagetag_content_object_id_c6593ae6; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX carelineapp_referfriendpagetag_content_object_id_c6593ae6 ON public.carelineapp_referfriendpagetag USING btree (content_object_id);
+
+
+--
+-- Name: carelineapp_referfriendpagetag_tag_id_66161c0b; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX carelineapp_referfriendpagetag_tag_id_66161c0b ON public.carelineapp_referfriendpagetag USING btree (tag_id);
+
+
+--
+-- Name: carelineapp_sendsmslinkpagetag_content_object_id_ef72cc07; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX carelineapp_sendsmslinkpagetag_content_object_id_ef72cc07 ON public.carelineapp_sendsmslinkpagetag USING btree (content_object_id);
+
+
+--
+-- Name: carelineapp_sendsmslinkpagetag_tag_id_83934ad7; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX carelineapp_sendsmslinkpagetag_tag_id_83934ad7 ON public.carelineapp_sendsmslinkpagetag USING btree (tag_id);
+
+
+--
+-- Name: carelineapp_signuppagetag_content_object_id_e761cb91; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX carelineapp_signuppagetag_content_object_id_e761cb91 ON public.carelineapp_signuppagetag USING btree (content_object_id);
+
+
+--
+-- Name: carelineapp_signuppagetag_tag_id_0b703c0f; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX carelineapp_signuppagetag_tag_id_0b703c0f ON public.carelineapp_signuppagetag USING btree (tag_id);
+
+
+--
+-- Name: carelineapp_supportuspagetag_content_object_id_4827fc28; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX carelineapp_supportuspagetag_content_object_id_4827fc28 ON public.carelineapp_supportuspagetag USING btree (content_object_id);
+
+
+--
+-- Name: carelineapp_supportuspagetag_tag_id_9717d34b; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX carelineapp_supportuspagetag_tag_id_9717d34b ON public.carelineapp_supportuspagetag USING btree (tag_id);
+
+
+--
+-- Name: carelineapp_topic_counselling_topic_id_47e0179f; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX carelineapp_topic_counselling_topic_id_47e0179f ON public.carelineapp_topic USING btree (counselling_topic_id);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_bitly_bittle_content_type_id_bcf1df41; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX django_bitly_bittle_content_type_id_bcf1df41 ON public.django_bitly_bittle USING btree (content_type_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: django_site_domain_a2e37b91_like; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX django_site_domain_a2e37b91_like ON public.django_site USING btree (domain varchar_pattern_ops);
+
+
+--
+-- Name: leads_leaddb_careline_topic_id_bfacc499; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX leads_leaddb_careline_topic_id_bfacc499 ON public.leads_leaddb USING btree (careline_topic_id);
+
+
+--
+-- Name: leads_leaddb_user_id_43d589f5; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX leads_leaddb_user_id_43d589f5 ON public.leads_leaddb USING btree (user_id);
+
+
+--
+-- Name: otp_totp_totpdevice_user_id_0fb18292; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX otp_totp_totpdevice_user_id_0fb18292 ON public.otp_totp_totpdevice USING btree (user_id);
+
+
+--
+-- Name: taggit_tag_name_58eb2ed9_like; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX taggit_tag_name_58eb2ed9_like ON public.taggit_tag USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: taggit_tag_slug_6be58b2c_like; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX taggit_tag_slug_6be58b2c_like ON public.taggit_tag USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: taggit_taggeditem_content_type_id_9957a03c; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX taggit_taggeditem_content_type_id_9957a03c ON public.taggit_taggeditem USING btree (content_type_id);
+
+
+--
+-- Name: taggit_taggeditem_content_type_id_object_id_196cc965_idx; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX taggit_taggeditem_content_type_id_object_id_196cc965_idx ON public.taggit_taggeditem USING btree (content_type_id, object_id);
+
+
+--
+-- Name: taggit_taggeditem_object_id_e2d7d1df; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX taggit_taggeditem_object_id_e2d7d1df ON public.taggit_taggeditem USING btree (object_id);
+
+
+--
+-- Name: taggit_taggeditem_tag_id_f4f5b767; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX taggit_taggeditem_tag_id_f4f5b767 ON public.taggit_taggeditem USING btree (tag_id);
+
+
+--
+-- Name: users_user_email_243f6e77_like; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX users_user_email_243f6e77_like ON public.users_user USING btree (email varchar_pattern_ops);
+
+
+--
+-- Name: users_user_groups_group_id_9afc8d0e; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX users_user_groups_group_id_9afc8d0e ON public.users_user_groups USING btree (group_id);
+
+
+--
+-- Name: users_user_groups_user_id_5f6f5a90; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX users_user_groups_user_id_5f6f5a90 ON public.users_user_groups USING btree (user_id);
+
+
+--
+-- Name: users_user_user_permissions_permission_id_0b93982e; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX users_user_user_permissions_permission_id_0b93982e ON public.users_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: users_user_user_permissions_user_id_20aca447; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX users_user_user_permissions_user_id_20aca447 ON public.users_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: wagtailcore_collection_path_d848dc19_like; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_collection_path_d848dc19_like ON public.wagtailcore_collection USING btree (path varchar_pattern_ops);
+
+
+--
+-- Name: wagtailcore_collectionview_collectionviewrestriction__47320efd; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_collectionview_collectionviewrestriction__47320efd ON public.wagtailcore_collectionviewrestriction_groups USING btree (collectionviewrestriction_id);
+
+
+--
+-- Name: wagtailcore_collectionviewrestriction_collection_id_761908ec; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_collectionviewrestriction_collection_id_761908ec ON public.wagtailcore_collectionviewrestriction USING btree (collection_id);
+
+
+--
+-- Name: wagtailcore_collectionviewrestriction_groups_group_id_1823f2a3; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_collectionviewrestriction_groups_group_id_1823f2a3 ON public.wagtailcore_collectionviewrestriction_groups USING btree (group_id);
+
+
+--
+-- Name: wagtailcore_groupcollectionpermission_collection_id_5423575a; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_groupcollectionpermission_collection_id_5423575a ON public.wagtailcore_groupcollectionpermission USING btree (collection_id);
+
+
+--
+-- Name: wagtailcore_groupcollectionpermission_group_id_05d61460; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_groupcollectionpermission_group_id_05d61460 ON public.wagtailcore_groupcollectionpermission USING btree (group_id);
+
+
+--
+-- Name: wagtailcore_groupcollectionpermission_permission_id_1b626275; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_groupcollectionpermission_permission_id_1b626275 ON public.wagtailcore_groupcollectionpermission USING btree (permission_id);
+
+
+--
+-- Name: wagtailcore_grouppagepermission_group_id_fc07e671; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_grouppagepermission_group_id_fc07e671 ON public.wagtailcore_grouppagepermission USING btree (group_id);
+
+
+--
+-- Name: wagtailcore_grouppagepermission_page_id_710b114a; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_grouppagepermission_page_id_710b114a ON public.wagtailcore_grouppagepermission USING btree (page_id);
+
+
+--
+-- Name: wagtailcore_page_content_type_id_c28424df; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_page_content_type_id_c28424df ON public.wagtailcore_page USING btree (content_type_id);
+
+
+--
+-- Name: wagtailcore_page_first_published_at_2b5dd637; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_page_first_published_at_2b5dd637 ON public.wagtailcore_page USING btree (first_published_at);
+
+
+--
+-- Name: wagtailcore_page_live_revision_id_930bd822; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_page_live_revision_id_930bd822 ON public.wagtailcore_page USING btree (live_revision_id);
+
+
+--
+-- Name: wagtailcore_page_owner_id_fbf7c332; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_page_owner_id_fbf7c332 ON public.wagtailcore_page USING btree (owner_id);
+
+
+--
+-- Name: wagtailcore_page_path_98eba2c8_like; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_page_path_98eba2c8_like ON public.wagtailcore_page USING btree (path varchar_pattern_ops);
+
+
+--
+-- Name: wagtailcore_page_slug_e7c11b8f; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_page_slug_e7c11b8f ON public.wagtailcore_page USING btree (slug);
+
+
+--
+-- Name: wagtailcore_page_slug_e7c11b8f_like; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_page_slug_e7c11b8f_like ON public.wagtailcore_page USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: wagtailcore_pagerevision_created_at_66954e3b; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_pagerevision_created_at_66954e3b ON public.wagtailcore_pagerevision USING btree (created_at);
+
+
+--
+-- Name: wagtailcore_pagerevision_page_id_d421cc1d; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_pagerevision_page_id_d421cc1d ON public.wagtailcore_pagerevision USING btree (page_id);
+
+
+--
+-- Name: wagtailcore_pagerevision_submitted_for_moderation_c682e44c; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_pagerevision_submitted_for_moderation_c682e44c ON public.wagtailcore_pagerevision USING btree (submitted_for_moderation);
+
+
+--
+-- Name: wagtailcore_pagerevision_user_id_2409d2f4; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_pagerevision_user_id_2409d2f4 ON public.wagtailcore_pagerevision USING btree (user_id);
+
+
+--
+-- Name: wagtailcore_pageviewrestri_pageviewrestriction_id_f147a99a; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_pageviewrestri_pageviewrestriction_id_f147a99a ON public.wagtailcore_pageviewrestriction_groups USING btree (pageviewrestriction_id);
+
+
+--
+-- Name: wagtailcore_pageviewrestriction_groups_group_id_6460f223; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_pageviewrestriction_groups_group_id_6460f223 ON public.wagtailcore_pageviewrestriction_groups USING btree (group_id);
+
+
+--
+-- Name: wagtailcore_pageviewrestriction_page_id_15a8bea6; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_pageviewrestriction_page_id_15a8bea6 ON public.wagtailcore_pageviewrestriction USING btree (page_id);
+
+
+--
+-- Name: wagtailcore_site_hostname_96b20b46; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_site_hostname_96b20b46 ON public.wagtailcore_site USING btree (hostname);
+
+
+--
+-- Name: wagtailcore_site_hostname_96b20b46_like; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_site_hostname_96b20b46_like ON public.wagtailcore_site USING btree (hostname varchar_pattern_ops);
+
+
+--
+-- Name: wagtailcore_site_root_page_id_e02fb95c; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailcore_site_root_page_id_e02fb95c ON public.wagtailcore_site USING btree (root_page_id);
+
+
+--
+-- Name: wagtaildocs_document_collection_id_23881625; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtaildocs_document_collection_id_23881625 ON public.wagtaildocs_document USING btree (collection_id);
+
+
+--
+-- Name: wagtaildocs_document_uploaded_by_user_id_17258b41; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtaildocs_document_uploaded_by_user_id_17258b41 ON public.wagtaildocs_document USING btree (uploaded_by_user_id);
+
+
+--
+-- Name: wagtailforms_formsubmission_page_id_e48e93e7; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailforms_formsubmission_page_id_e48e93e7 ON public.wagtailforms_formsubmission USING btree (page_id);
+
+
+--
+-- Name: wagtailimages_image_collection_id_c2f8af7e; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailimages_image_collection_id_c2f8af7e ON public.wagtailimages_image USING btree (collection_id);
+
+
+--
+-- Name: wagtailimages_image_created_at_86fa6cd4; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailimages_image_created_at_86fa6cd4 ON public.wagtailimages_image USING btree (created_at);
+
+
+--
+-- Name: wagtailimages_image_uploaded_by_user_id_5d73dc75; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailimages_image_uploaded_by_user_id_5d73dc75 ON public.wagtailimages_image USING btree (uploaded_by_user_id);
+
+
+--
+-- Name: wagtailimages_rendition_filter_spec_1cba3201; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailimages_rendition_filter_spec_1cba3201 ON public.wagtailimages_rendition USING btree (filter_spec);
+
+
+--
+-- Name: wagtailimages_rendition_filter_spec_1cba3201_like; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailimages_rendition_filter_spec_1cba3201_like ON public.wagtailimages_rendition USING btree (filter_spec varchar_pattern_ops);
+
+
+--
+-- Name: wagtailimages_rendition_image_id_3e1fd774; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailimages_rendition_image_id_3e1fd774 ON public.wagtailimages_rendition USING btree (image_id);
+
+
+--
+-- Name: wagtailredirects_redirect_old_path_bb35247b; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailredirects_redirect_old_path_bb35247b ON public.wagtailredirects_redirect USING btree (old_path);
+
+
+--
+-- Name: wagtailredirects_redirect_old_path_bb35247b_like; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailredirects_redirect_old_path_bb35247b_like ON public.wagtailredirects_redirect USING btree (old_path varchar_pattern_ops);
+
+
+--
+-- Name: wagtailredirects_redirect_redirect_page_id_b5728a8f; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailredirects_redirect_redirect_page_id_b5728a8f ON public.wagtailredirects_redirect USING btree (redirect_page_id);
+
+
+--
+-- Name: wagtailredirects_redirect_site_id_780a0e1e; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailredirects_redirect_site_id_780a0e1e ON public.wagtailredirects_redirect USING btree (site_id);
+
+
+--
+-- Name: wagtailsearch_editorspick_page_id_28cbc274; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailsearch_editorspick_page_id_28cbc274 ON public.wagtailsearch_editorspick USING btree (page_id);
+
+
+--
+-- Name: wagtailsearch_editorspick_query_id_c6eee4a0; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailsearch_editorspick_query_id_c6eee4a0 ON public.wagtailsearch_editorspick USING btree (query_id);
+
+
+--
+-- Name: wagtailsearch_query_query_string_e785ea07_like; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailsearch_query_query_string_e785ea07_like ON public.wagtailsearch_query USING btree (query_string varchar_pattern_ops);
+
+
+--
+-- Name: wagtailsearch_querydailyhits_query_id_2185994b; Type: INDEX; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+CREATE INDEX wagtailsearch_querydailyhits_query_id_2185994b ON public.wagtailsearch_querydailyhits USING btree (query_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_basicpagetag carelineapp_basicpag_content_object_id_91ddad5b_fk_carelinea; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_basicpagetag
+    ADD CONSTRAINT carelineapp_basicpag_content_object_id_91ddad5b_fk_carelinea FOREIGN KEY (content_object_id) REFERENCES public.carelineapp_basicpage(page_ptr_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_basicpage carelineapp_basicpag_page_ptr_id_914926c8_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_basicpage
+    ADD CONSTRAINT carelineapp_basicpag_page_ptr_id_914926c8_fk_wagtailco FOREIGN KEY (page_ptr_id) REFERENCES public.wagtailcore_page(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_basicpagetag carelineapp_basicpagetag_tag_id_32aa1420_fk_taggit_tag_id; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_basicpagetag
+    ADD CONSTRAINT carelineapp_basicpagetag_tag_id_32aa1420_fk_taggit_tag_id FOREIGN KEY (tag_id) REFERENCES public.taggit_tag(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_companyaddresssettings carelineapp_companya_site_id_a66961e4_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_companyaddresssettings
+    ADD CONSTRAINT carelineapp_companya_site_id_a66961e4_fk_wagtailco FOREIGN KEY (site_id) REFERENCES public.wagtailcore_site(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_contactuspagetag carelineapp_contactu_content_object_id_89570ff3_fk_carelinea; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_contactuspagetag
+    ADD CONSTRAINT carelineapp_contactu_content_object_id_89570ff3_fk_carelinea FOREIGN KEY (content_object_id) REFERENCES public.carelineapp_contactuspage(page_ptr_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_contactuspage carelineapp_contactu_page_ptr_id_c58085ec_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_contactuspage
+    ADD CONSTRAINT carelineapp_contactu_page_ptr_id_c58085ec_fk_wagtailco FOREIGN KEY (page_ptr_id) REFERENCES public.wagtailcore_page(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_contactuspagetag carelineapp_contactuspagetag_tag_id_6a2d26ea_fk_taggit_tag_id; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_contactuspagetag
+    ADD CONSTRAINT carelineapp_contactuspagetag_tag_id_6a2d26ea_fk_taggit_tag_id FOREIGN KEY (tag_id) REFERENCES public.taggit_tag(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_googlesettings carelineapp_googlese_site_id_6f15fadc_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_googlesettings
+    ADD CONSTRAINT carelineapp_googlese_site_id_6f15fadc_fk_wagtailco FOREIGN KEY (site_id) REFERENCES public.wagtailcore_site(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_loginpagetag carelineapp_loginpag_content_object_id_ee643841_fk_carelinea; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_loginpagetag
+    ADD CONSTRAINT carelineapp_loginpag_content_object_id_ee643841_fk_carelinea FOREIGN KEY (content_object_id) REFERENCES public.carelineapp_loginpage(page_ptr_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_loginpage carelineapp_loginpag_page_ptr_id_01e1568a_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_loginpage
+    ADD CONSTRAINT carelineapp_loginpag_page_ptr_id_01e1568a_fk_wagtailco FOREIGN KEY (page_ptr_id) REFERENCES public.wagtailcore_page(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_loginpagetag carelineapp_loginpagetag_tag_id_861dd7c0_fk_taggit_tag_id; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_loginpagetag
+    ADD CONSTRAINT carelineapp_loginpagetag_tag_id_861dd7c0_fk_taggit_tag_id FOREIGN KEY (tag_id) REFERENCES public.taggit_tag(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_referfriendpagetag carelineapp_referfri_content_object_id_c6593ae6_fk_carelinea; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_referfriendpagetag
+    ADD CONSTRAINT carelineapp_referfri_content_object_id_c6593ae6_fk_carelinea FOREIGN KEY (content_object_id) REFERENCES public.carelineapp_referfriendpage(page_ptr_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_referfriendpage carelineapp_referfri_page_ptr_id_3c28a79f_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_referfriendpage
+    ADD CONSTRAINT carelineapp_referfri_page_ptr_id_3c28a79f_fk_wagtailco FOREIGN KEY (page_ptr_id) REFERENCES public.wagtailcore_page(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_referfriendpagetag carelineapp_referfriendpagetag_tag_id_66161c0b_fk_taggit_tag_id; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_referfriendpagetag
+    ADD CONSTRAINT carelineapp_referfriendpagetag_tag_id_66161c0b_fk_taggit_tag_id FOREIGN KEY (tag_id) REFERENCES public.taggit_tag(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_sendsmslinkpagetag carelineapp_sendsmsl_content_object_id_ef72cc07_fk_carelinea; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_sendsmslinkpagetag
+    ADD CONSTRAINT carelineapp_sendsmsl_content_object_id_ef72cc07_fk_carelinea FOREIGN KEY (content_object_id) REFERENCES public.carelineapp_sendsmslink(page_ptr_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_sendsmslink carelineapp_sendsmsl_page_ptr_id_ef4249a3_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_sendsmslink
+    ADD CONSTRAINT carelineapp_sendsmsl_page_ptr_id_ef4249a3_fk_wagtailco FOREIGN KEY (page_ptr_id) REFERENCES public.wagtailcore_page(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_sendsmslinkpagetag carelineapp_sendsmslinkpagetag_tag_id_83934ad7_fk_taggit_tag_id; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_sendsmslinkpagetag
+    ADD CONSTRAINT carelineapp_sendsmslinkpagetag_tag_id_83934ad7_fk_taggit_tag_id FOREIGN KEY (tag_id) REFERENCES public.taggit_tag(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_signuppagetag carelineapp_signuppa_content_object_id_e761cb91_fk_carelinea; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_signuppagetag
+    ADD CONSTRAINT carelineapp_signuppa_content_object_id_e761cb91_fk_carelinea FOREIGN KEY (content_object_id) REFERENCES public.carelineapp_signuppage(page_ptr_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_signuppage carelineapp_signuppa_page_ptr_id_d707cfc2_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_signuppage
+    ADD CONSTRAINT carelineapp_signuppa_page_ptr_id_d707cfc2_fk_wagtailco FOREIGN KEY (page_ptr_id) REFERENCES public.wagtailcore_page(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_signuppagetag carelineapp_signuppagetag_tag_id_0b703c0f_fk_taggit_tag_id; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_signuppagetag
+    ADD CONSTRAINT carelineapp_signuppagetag_tag_id_0b703c0f_fk_taggit_tag_id FOREIGN KEY (tag_id) REFERENCES public.taggit_tag(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_supportuspagetag carelineapp_supportu_content_object_id_4827fc28_fk_carelinea; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_supportuspagetag
+    ADD CONSTRAINT carelineapp_supportu_content_object_id_4827fc28_fk_carelinea FOREIGN KEY (content_object_id) REFERENCES public.carelineapp_supportuspage(page_ptr_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_supportuspage carelineapp_supportu_page_ptr_id_a376f63b_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_supportuspage
+    ADD CONSTRAINT carelineapp_supportu_page_ptr_id_a376f63b_fk_wagtailco FOREIGN KEY (page_ptr_id) REFERENCES public.wagtailcore_page(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_supportuspagetag carelineapp_supportuspagetag_tag_id_9717d34b_fk_taggit_tag_id; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_supportuspagetag
+    ADD CONSTRAINT carelineapp_supportuspagetag_tag_id_9717d34b_fk_taggit_tag_id FOREIGN KEY (tag_id) REFERENCES public.taggit_tag(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: carelineapp_topic carelineapp_topic_counselling_topic_id_47e0179f_fk_wagtaildo; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.carelineapp_topic
+    ADD CONSTRAINT carelineapp_topic_counselling_topic_id_47e0179f_fk_wagtaildo FOREIGN KEY (counselling_topic_id) REFERENCES public.wagtaildocs_document(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_bitly_bittle django_bitly_bittle_content_type_id_bcf1df41_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.django_bitly_bittle
+    ADD CONSTRAINT django_bitly_bittle_content_type_id_bcf1df41_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: leads_leaddb leads_leaddb_careline_topic_id_bfacc499_fk_carelineapp_topic_id; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.leads_leaddb
+    ADD CONSTRAINT leads_leaddb_careline_topic_id_bfacc499_fk_carelineapp_topic_id FOREIGN KEY (careline_topic_id) REFERENCES public.carelineapp_topic(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: leads_leaddb leads_leaddb_user_id_43d589f5_fk_users_user_tracking_ptr_id; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.leads_leaddb
+    ADD CONSTRAINT leads_leaddb_user_id_43d589f5_fk_users_user_tracking_ptr_id FOREIGN KEY (user_id) REFERENCES public.users_user(tracking_ptr_id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: taggit_taggeditem taggit_taggeditem_content_type_id_9957a03c_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.taggit_taggeditem
+    ADD CONSTRAINT taggit_taggeditem_content_type_id_9957a03c_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: taggit_taggeditem taggit_taggeditem_tag_id_f4f5b767_fk_taggit_tag_id; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.taggit_taggeditem
+    ADD CONSTRAINT taggit_taggeditem_tag_id_f4f5b767_fk_taggit_tag_id FOREIGN KEY (tag_id) REFERENCES public.taggit_tag(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_user_groups users_user_groups_group_id_9afc8d0e_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.users_user_groups
+    ADD CONSTRAINT users_user_groups_group_id_9afc8d0e_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_user users_user_tracking_ptr_id_63837dc6_fk_users_tracking_id; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.users_user
+    ADD CONSTRAINT users_user_tracking_ptr_id_63837dc6_fk_users_tracking_id FOREIGN KEY (tracking_ptr_id) REFERENCES public.users_tracking(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: users_user_user_permissions users_user_user_perm_permission_id_0b93982e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.users_user_user_permissions
+    ADD CONSTRAINT users_user_user_perm_permission_id_0b93982e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtail_feeds_rssfeedssettings wagtail_feeds_rssfee_site_id_86fa0b0d_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtail_feeds_rssfeedssettings
+    ADD CONSTRAINT wagtail_feeds_rssfee_site_id_86fa0b0d_fk_wagtailco FOREIGN KEY (site_id) REFERENCES public.wagtailcore_site(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailcore_collectionviewrestriction wagtailcore_collecti_collection_id_761908ec_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_collectionviewrestriction
+    ADD CONSTRAINT wagtailcore_collecti_collection_id_761908ec_fk_wagtailco FOREIGN KEY (collection_id) REFERENCES public.wagtailcore_collection(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailcore_collectionviewrestriction_groups wagtailcore_collecti_collectionviewrestri_47320efd_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_collectionviewrestriction_groups
+    ADD CONSTRAINT wagtailcore_collecti_collectionviewrestri_47320efd_fk_wagtailco FOREIGN KEY (collectionviewrestriction_id) REFERENCES public.wagtailcore_collectionviewrestriction(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailcore_collectionviewrestriction_groups wagtailcore_collecti_group_id_1823f2a3_fk_auth_grou; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_collectionviewrestriction_groups
+    ADD CONSTRAINT wagtailcore_collecti_group_id_1823f2a3_fk_auth_grou FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailcore_groupcollectionpermission wagtailcore_groupcol_collection_id_5423575a_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_groupcollectionpermission
+    ADD CONSTRAINT wagtailcore_groupcol_collection_id_5423575a_fk_wagtailco FOREIGN KEY (collection_id) REFERENCES public.wagtailcore_collection(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailcore_groupcollectionpermission wagtailcore_groupcol_group_id_05d61460_fk_auth_grou; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_groupcollectionpermission
+    ADD CONSTRAINT wagtailcore_groupcol_group_id_05d61460_fk_auth_grou FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailcore_groupcollectionpermission wagtailcore_groupcol_permission_id_1b626275_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_groupcollectionpermission
+    ADD CONSTRAINT wagtailcore_groupcol_permission_id_1b626275_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailcore_grouppagepermission wagtailcore_grouppag_group_id_fc07e671_fk_auth_grou; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_grouppagepermission
+    ADD CONSTRAINT wagtailcore_grouppag_group_id_fc07e671_fk_auth_grou FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailcore_grouppagepermission wagtailcore_grouppag_page_id_710b114a_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_grouppagepermission
+    ADD CONSTRAINT wagtailcore_grouppag_page_id_710b114a_fk_wagtailco FOREIGN KEY (page_id) REFERENCES public.wagtailcore_page(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailcore_page wagtailcore_page_content_type_id_c28424df_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_page
+    ADD CONSTRAINT wagtailcore_page_content_type_id_c28424df_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailcore_page wagtailcore_page_live_revision_id_930bd822_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_page
+    ADD CONSTRAINT wagtailcore_page_live_revision_id_930bd822_fk_wagtailco FOREIGN KEY (live_revision_id) REFERENCES public.wagtailcore_pagerevision(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailcore_pagerevision wagtailcore_pagerevi_page_id_d421cc1d_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_pagerevision
+    ADD CONSTRAINT wagtailcore_pagerevi_page_id_d421cc1d_fk_wagtailco FOREIGN KEY (page_id) REFERENCES public.wagtailcore_page(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailcore_pageviewrestriction_groups wagtailcore_pageview_group_id_6460f223_fk_auth_grou; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_pageviewrestriction_groups
+    ADD CONSTRAINT wagtailcore_pageview_group_id_6460f223_fk_auth_grou FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailcore_pageviewrestriction wagtailcore_pageview_page_id_15a8bea6_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_pageviewrestriction
+    ADD CONSTRAINT wagtailcore_pageview_page_id_15a8bea6_fk_wagtailco FOREIGN KEY (page_id) REFERENCES public.wagtailcore_page(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailcore_pageviewrestriction_groups wagtailcore_pageview_pageviewrestriction__f147a99a_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_pageviewrestriction_groups
+    ADD CONSTRAINT wagtailcore_pageview_pageviewrestriction__f147a99a_fk_wagtailco FOREIGN KEY (pageviewrestriction_id) REFERENCES public.wagtailcore_pageviewrestriction(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailcore_site wagtailcore_site_root_page_id_e02fb95c_fk_wagtailcore_page_id; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailcore_site
+    ADD CONSTRAINT wagtailcore_site_root_page_id_e02fb95c_fk_wagtailcore_page_id FOREIGN KEY (root_page_id) REFERENCES public.wagtailcore_page(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtaildocs_document wagtaildocs_document_collection_id_23881625_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtaildocs_document
+    ADD CONSTRAINT wagtaildocs_document_collection_id_23881625_fk_wagtailco FOREIGN KEY (collection_id) REFERENCES public.wagtailcore_collection(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailforms_formsubmission wagtailforms_formsub_page_id_e48e93e7_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailforms_formsubmission
+    ADD CONSTRAINT wagtailforms_formsub_page_id_e48e93e7_fk_wagtailco FOREIGN KEY (page_id) REFERENCES public.wagtailcore_page(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailimages_image wagtailimages_image_collection_id_c2f8af7e_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailimages_image
+    ADD CONSTRAINT wagtailimages_image_collection_id_c2f8af7e_fk_wagtailco FOREIGN KEY (collection_id) REFERENCES public.wagtailcore_collection(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailimages_rendition wagtailimages_rendit_image_id_3e1fd774_fk_wagtailim; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailimages_rendition
+    ADD CONSTRAINT wagtailimages_rendit_image_id_3e1fd774_fk_wagtailim FOREIGN KEY (image_id) REFERENCES public.wagtailimages_image(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailredirects_redirect wagtailredirects_red_redirect_page_id_b5728a8f_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailredirects_redirect
+    ADD CONSTRAINT wagtailredirects_red_redirect_page_id_b5728a8f_fk_wagtailco FOREIGN KEY (redirect_page_id) REFERENCES public.wagtailcore_page(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailredirects_redirect wagtailredirects_red_site_id_780a0e1e_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailredirects_redirect
+    ADD CONSTRAINT wagtailredirects_red_site_id_780a0e1e_fk_wagtailco FOREIGN KEY (site_id) REFERENCES public.wagtailcore_site(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailsearch_editorspick wagtailsearch_editor_page_id_28cbc274_fk_wagtailco; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailsearch_editorspick
+    ADD CONSTRAINT wagtailsearch_editor_page_id_28cbc274_fk_wagtailco FOREIGN KEY (page_id) REFERENCES public.wagtailcore_page(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailsearch_editorspick wagtailsearch_editor_query_id_c6eee4a0_fk_wagtailse; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailsearch_editorspick
+    ADD CONSTRAINT wagtailsearch_editor_query_id_c6eee4a0_fk_wagtailse FOREIGN KEY (query_id) REFERENCES public.wagtailsearch_query(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wagtailsearch_querydailyhits wagtailsearch_queryd_query_id_2185994b_fk_wagtailse; Type: FK CONSTRAINT; Schema: public; Owner: carelineapp_dev8ll88822
+--
+
+ALTER TABLE ONLY public.wagtailsearch_querydailyhits
+    ADD CONSTRAINT wagtailsearch_queryd_query_id_2185994b_fk_wagtailse FOREIGN KEY (query_id) REFERENCES public.wagtailsearch_query(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
