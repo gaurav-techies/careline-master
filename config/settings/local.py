@@ -101,7 +101,7 @@ MIDDLEWARE += [
 
 INTERNAL_IPS = ['127.0.0.1', '10.0.0.11', '10.0.0.10', '172.20.10.2', '10.0.0.19', ]
 
-ALLOWED_HOSTS = ['dev.carelineapp.org', '10.0.0.11', '10.0.0.42', '10.0.0.10', 'c5ef9f07.ngrok.io', ]
+ALLOWED_HOSTS = ['dev.carelineapp.org', '10.0.0.11', '10.0.0.42', '10.0.0.10', 'c5ef9f07.ngrok.io','localhost' ]
 
 DEBUG_TOOLBAR_CONFIG = {
     'DISABLE_PANELS': [
