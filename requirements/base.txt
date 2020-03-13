@@ -105,7 +105,7 @@ django-user-agents==0.3.2
 
 django-wagtail-feeds==0.1.0
 
-wagtail-2fa==1.0.0
+wagtail-2fa==1.4.1
 
 django-rest-auth==0.9.3
 
