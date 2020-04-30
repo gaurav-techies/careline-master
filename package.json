@@ -18,7 +18,7 @@
     "grunt-contrib-sass": ">= 1.0.0",
     "grunt-contrib-uglify": ">= 1.0.1",
     "grunt-contrib-watch": "^1.1.0",
-    "jquery": "^1.11.3"
+    "jquery": "^3.5.0"
   },
   "engine": "node 4.4.7",
   "devDependencies": {
