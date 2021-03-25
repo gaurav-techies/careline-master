@@ -98,7 +98,7 @@ Django==2.0.8
 wagtail==2.3
 
 # DJANGO User agents
-PyYAML==3.13
+PyYAML==5.4
 ua-parser==0.8.0
 user-agents==1.1.0
 django-user-agents==0.3.2
