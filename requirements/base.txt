@@ -94,7 +94,7 @@ pysocks==1.6.8
 twilio==6.18.0
 
 #Wagtail
-Django==2.0.8
+Django==2.2.24
 wagtail==2.3
 
 # DJANGO User agents
